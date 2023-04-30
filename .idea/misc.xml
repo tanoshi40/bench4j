@@ -4,33 +4,15 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/bench4j8/pom.xml" />
-        <option value="$PROJECT_DIR$/bench4j20/pom.xml" />
-        <option value="$PROJECT_DIR$/console/pom.xml" />
-        <option value="$PROJECT_DIR$/Utils/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/tables/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/utils.table/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/untitled/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.tables/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.colors/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.units/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/utils/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/Utils/pom.xml" />
-        <option value="$PROJECT_DIR$/bench4j8/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/tables/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/untitled/pom.xml" />
-        <option value="$PROJECT_DIR$/utilities/utils.table/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.colors/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.tables/pom.xml" />
-        <option value="$PROJECT_DIR$/utils.units/pom.xml" />
+        <option value="$PROJECT_DIR$/utils/tmp/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="openjdk-20" project-jdk-type="JavaSDK" />
 </project>

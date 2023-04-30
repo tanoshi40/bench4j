@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="465bdb81-936d-40de-beb3-bcac5e63adb1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/bench4j.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/GCMemoryTesting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/MemoryTesting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/ProductManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/AbstractProduct.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/BrandedProduct.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/ElectronicGood.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/GroceryProduct.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/LuxuryGood.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/ProductGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/releases/1.0.0/bench4j20-1.0.0-RELEASE.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/colors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/TODOS" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/TODOS" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/testdata/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/units/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/units/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\Data\repositories\maven\repo" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2PA6urgye3OymstmQyO4re8C76O" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "jdk.selected.JAVA_MODULE": "openjdk-20",
+    "last_opened_file_path": "E:/Programming/git/bench4j/pom.xml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings"
+  }
+}]]></component>
+  <component name="RunManager" selected="Maven.[parent] build">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="parent" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="parent" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="[bench4j] build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/bench4j20" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="[parent] build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="[utils] build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/bench4j20" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Maven.[parent] build" />
+      <item itemvalue="Maven.[bench4j] build" />
+      <item itemvalue="Maven.[utils] build" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="465bdb81-936d-40de-beb3-bcac5e63adb1" name="Changes" comment="" />
+      <created>1682887766303</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682887766303</updated>
+    </task>
+    <servers />
+  </component>
+</project>

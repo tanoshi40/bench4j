@@ -3,22 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/bench4j20/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bench4j20/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bench4j8/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/bench4j8/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/console/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/console/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/tables/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/tables/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/untitled/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/untitled/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/utils.table/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utilities/utils.table/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.colors/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.colors/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.tables/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.tables/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.units/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/utils.units/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/colors/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/colors/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/src/main/java" charset="UTF-8" />
@@ -27,6 +13,8 @@
     <file url="file://$PROJECT_DIR$/utils/tables/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/testdata/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/testdata/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/tmp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/utils/tmp/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/units/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/utils/units/src/main/resources" charset="UTF-8" />
   </component>

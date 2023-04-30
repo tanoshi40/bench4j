@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="testing.console" />
         <module name="testdata" />
         <module name="utils.colors" />
         <module name="bench4j20" />
@@ -15,10 +14,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bench4j8" target="1.8" />
-      <module name="tables" target="20" />
-      <module name="Utils" target="20" />
-      <module name="utils.table" target="20" />
+      <module name="tmp" target="20" />
     </bytecodeTargetLevel>
   </component>
 </project>
