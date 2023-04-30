@@ -106,4 +106,8 @@ public enum Color {
     }
 
     public String getReset() { return AsciiColorCodes.RESET; }
+
+    public ConsoleTextColor consoleColor() {
+        return new ConsoleTextColor(this);
+    }
 }

@@ -111,7 +111,7 @@ public class TableView {
     public String toView() {
         StringJoiner lines = new StringJoiner("\n");
 
-        String defaultConnector = TableUtils.buildDefaultConnector(connectorTemplate, settings);
+        String defaultConnector = TableUtils.buildDefaultConnector(connectorTemplate);
 
         // top line
         if (!settings.getFormat().equals(TableFormat.MINIMAL)) {
@@ -119,8 +119,8 @@ public class TableView {
                     connectorTemplate,
                     TableUtils.ConnectorType.TOP,
                     rows.get(0).getType() == ITableRow.TableRowType.TITLE,
-                    false,
-                    settings));
+                    false
+            ));
         }
 
         ITableRow.TableRowType lastRowType = null;
@@ -141,8 +141,8 @@ public class TableView {
         // add bottom line (if not minimalistic)
         if (!settings.getFormat().equals(TableFormat.MINIMAL)) {
             lines.add(TableUtils.buildConnector(
-                    connectorTemplate, TableUtils.ConnectorType.BOTTOM,
-                    settings));
+                    connectorTemplate, TableUtils.ConnectorType.BOTTOM
+            ));
         }
 
         return lines.toString();
@@ -158,19 +158,19 @@ public class TableView {
         }
 
         if (nextType.equals(ITableRow.TableRowType.TITLE)) {
-            return TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.CENTER, true, settings.getFormat() == TableFormat.LARGE, settings);
+            return TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.CENTER, true, settings.getFormat() == TableFormat.LARGE);
         }
 
         return switch (lastType) {
             case TITLE -> switch (settings.getFormat()) {
                 case MINIMAL -> null;
                 case DEFAULT, LARGE ->
-                        TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.BOTTOM, true, false, settings);
+                        TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.BOTTOM, true, false);
             };
             case HEADER, SEPARATOR -> switch (settings.getFormat()) {
                 case MINIMAL, DEFAULT -> connector;
                 case LARGE ->
-                        TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.CENTER, false, true, settings);
+                        TableUtils.buildConnector(connectorTemplate, TableUtils.ConnectorType.CENTER, false, true);
             };
             case CONTENT -> switch (settings.getFormat()) {
                 case MINIMAL, DEFAULT -> null;

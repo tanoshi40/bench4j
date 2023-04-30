@@ -19,9 +19,13 @@ class TableUtils {
         char verticalChar = TableCharacters.CharacterType.LINE_VERTICAL.getChar();
         StringJoiner builder = new StringJoiner(String.format(" %c ", verticalChar));
         for (int i = 0; i < rowContent.length; i++) {
-            String rawEntryText = rowContent[i];
-            int width = columnWidths[i];
-            builder.add(buildPaddedEntry(rawEntryText, width));
+            final int width = columnWidths[i];
+
+            final String rawEntryText = rowContent[i];
+            final String paddedEntry = buildPaddedEntry(rawEntryText, width);
+            final String colorizedEntry = settings.colorizedContent(paddedEntry);
+
+            builder.add(colorizedEntry);
         }
 
         return switch (settings.getFormat()) {
@@ -50,15 +54,15 @@ class TableUtils {
         return rowEntry;
     }
 
-    static String buildDefaultConnector(String lineTemplate, TableSettings settings) {
-        return buildConnector(lineTemplate, ConnectorType.CENTER, settings);
-    }
-    
-    static String buildConnector(String lineTemplate, ConnectorType position, TableSettings settings) {
-        return buildConnector(lineTemplate, position, false, false, settings);
+    static String buildDefaultConnector(String lineTemplate) {
+        return buildConnector(lineTemplate, ConnectorType.CENTER);
     }
 
-    static String buildConnector(String lineTemplate, ConnectorType position, boolean titleLine, boolean doubleHorizontal, TableSettings settings) {
+    static String buildConnector(String lineTemplate, ConnectorType position) {
+        return buildConnector(lineTemplate, position, false, false);
+    }
+
+    static String buildConnector(String lineTemplate, ConnectorType position, boolean titleLine, boolean doubleHorizontal) {
         TableCharacters.LineType lineType = doubleHorizontal ? TableCharacters.LineType.DOUBLE_HORIZONTAL : TableCharacters.LineType.NORMAL;
 
         return buildConnector(
@@ -102,10 +106,10 @@ class TableUtils {
 
     static String buildTitleRow(String title, int totalWidth, TableSettings settings) {
         return switch (settings.getFormat()) {
-            case MINIMAL -> title;
+            case MINIMAL -> settings.colorizedContent(title);
             case DEFAULT, LARGE -> {
                 char verticalChar = TableCharacters.CharacterType.LINE_VERTICAL.getChar();
-                yield String.format(defaultRowFormat, verticalChar, buildPaddedEntry(title, totalWidth), verticalChar);
+                yield String.format(defaultRowFormat, verticalChar, settings.colorizedContent(buildPaddedEntry(title, totalWidth)), verticalChar);
             }
         };
     }

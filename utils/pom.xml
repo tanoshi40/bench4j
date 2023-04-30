@@ -18,6 +18,7 @@
         <module>tables</module>
         <module>colors</module>
         <module>units</module>
+        <module>_testing</module>
     </modules>
 
     <properties>

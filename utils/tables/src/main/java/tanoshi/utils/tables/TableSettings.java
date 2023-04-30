@@ -6,7 +6,7 @@ public class TableSettings {
 
     private TableFormat format = TableFormat.DEFAULT;
     private TableStyle style = TableStyle.DEFAULT;
-    private ConsoleTextColor color = new ConsoleTextColor();
+    private ConsoleTextColor contentColor = null;
 
     public TableFormat getFormat() {
         return format;
@@ -16,12 +16,12 @@ public class TableSettings {
         this.format = tableFormat;
     }
 
-    public ConsoleTextColor getColor() {
-        return color;
+    public ConsoleTextColor getContentColor() {
+        return contentColor;
     }
 
-    public void setColor(ConsoleTextColor color) {
-        this.color = color;
+    public void setContentColor(ConsoleTextColor contentColor) {
+        this.contentColor = contentColor;
     }
 
     public TableStyle getStyle() {
@@ -32,4 +32,7 @@ public class TableSettings {
         this.style = style;
     }
 
+    public String colorizedContent(String content) {
+        return contentColor == null ? content : contentColor.colorizeText(content);
+    }
 }
