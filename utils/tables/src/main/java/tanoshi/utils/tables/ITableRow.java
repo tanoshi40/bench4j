@@ -1,6 +1,8 @@
 package tanoshi.utils.tables;
 
 
+import tanoshi.utils.tables.models.TableSettings;
+
 interface ITableRow {
 
     enum TableRowType {

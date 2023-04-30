@@ -1,6 +1,6 @@
 package tanoshi.bench4j.data;
 
-import tanoshi.utils.tables.TableSettings;
+import tanoshi.utils.tables.models.TableSettings;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
 

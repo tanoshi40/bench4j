@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import tanoshi.testdata.models.Person;
 import tanoshi.testdata.provider.PersonProvider;
 import tanoshi.utils.tables.models.Table;
+import tanoshi.utils.tables.models.TableSettings;
 
 import java.util.List;
 
@@ -22,11 +23,9 @@ class TableViewTest {
     @EnumSource(value = TableFormat.class)
     public void viewSimple(TableFormat format) {
         // Arrange
-        String[] headers = getHeaders();
         Table table = buildTable(10, null);
 
-        TableSettings settings = new TableSettings();
-        settings.setFormat(format);
+        TableSettings settings = new TableSettings().withFormat(format);
 
         // Act
         TableView builder = TableView.build(table, settings);
@@ -44,8 +43,7 @@ class TableViewTest {
         // Arrange
         Table table = buildTable(10, "title");
 
-        TableSettings settings = new TableSettings();
-        settings.setFormat(format);
+        TableSettings settings = new TableSettings().withFormat(format);
 
         // Act
         TableView builder = TableView.build(table, settings);
@@ -64,8 +62,7 @@ class TableViewTest {
         String[] headers = getHeaders();
         Table[] tables = buildTables(false);
 
-        TableSettings settings = new TableSettings();
-        settings.setFormat(format);
+        TableSettings settings = new TableSettings().withFormat(format);
 
         // Act
         TableView builder = TableView.build(tables, headers, "complex table", settings);
@@ -84,8 +81,7 @@ class TableViewTest {
         String[] headers = getHeaders();
         Table[] tables = buildTables(true);
 
-        TableSettings settings = new TableSettings();
-        settings.setFormat(format);
+        TableSettings settings = new TableSettings().withFormat(format);
 
         // Act
         TableView builder = TableView.build(tables, headers, "complex table", settings);

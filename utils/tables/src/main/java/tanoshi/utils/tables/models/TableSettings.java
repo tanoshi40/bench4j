@@ -1,6 +1,8 @@
-package tanoshi.utils.tables;
+package tanoshi.utils.tables.models;
 
 import tanoshi.utils.colors.ConsoleTextColor;
+import tanoshi.utils.tables.TableFormat;
+import tanoshi.utils.tables.TableStyle;
 
 public class TableSettings {
 
@@ -12,24 +14,27 @@ public class TableSettings {
         return format;
     }
 
-    public void setFormat(TableFormat tableFormat) {
+    public TableSettings withFormat(TableFormat tableFormat) {
         this.format = tableFormat;
+        return this;
     }
 
     public ConsoleTextColor getContentColor() {
         return contentColor;
     }
 
-    public void setContentColor(ConsoleTextColor contentColor) {
+    public TableSettings withContentColor(ConsoleTextColor contentColor) {
         this.contentColor = contentColor;
+        return this;
     }
 
     public TableStyle getStyle() {
         return style;
     }
 
-    public void setStyle(TableStyle style) {
+    public TableSettings withStyle(TableStyle style) {
         this.style = style;
+        return this;
     }
 
     public String colorizedContent(String content) {

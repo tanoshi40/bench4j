@@ -1,6 +1,7 @@
 package tanoshi.utils.tables;
 
 import tanoshi.utils.tables.models.Table;
+import tanoshi.utils.tables.models.TableSettings;
 
 import java.util.ArrayList;
 import java.util.List;

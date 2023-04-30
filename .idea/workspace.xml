@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="465bdb81-936d-40de-beb3-bcac5e63adb1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/TODOS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/ITableRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/ITableRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/models/TableSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
