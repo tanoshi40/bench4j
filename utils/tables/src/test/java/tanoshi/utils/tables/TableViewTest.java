@@ -110,7 +110,8 @@ class TableViewTest {
     }
 
     private static Table buildTable(int size, String title) {
-        return new Table(getHeaders(), getContent(size), title);
+        return Table.builder(getHeaders(), getContent(size))
+                .withTitle(title).build();
     }
 
     private static String[][] getContent(int size) {
