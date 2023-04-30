@@ -16,47 +16,53 @@ public class BenchmarkConfig {
         return targetBatchTimeSec;
     }
 
-    public void setTargetBatchTimeSec(double targetBatchTimeSec) {
+    public BenchmarkConfig withTargetBatchTimeSec(double targetBatchTimeSec) {
         this.targetBatchTimeSec = targetBatchTimeSec;
+        return this;
     }
 
     public double getMaxBatchTimeSec() {
         return maxBatchTimeSec;
     }
 
-    public void setMaxBatchTimeSec(double maxBatchTimeSec) {
+    public BenchmarkConfig withMaxBatchTimeSec(double maxBatchTimeSec) {
         this.maxBatchTimeSec = maxBatchTimeSec;
+        return this;
     }
 
     public int getMaxBatchSize() {
         return maxBatchSize;
     }
 
-    public void setMaxBatchSize(int maxBatchSize) {
+    public BenchmarkConfig withMaxBatchSize(int maxBatchSize) {
         this.maxBatchSize = maxBatchSize;
+        return this;
     }
 
     public int getBatchIterations() {
         return batchIterations;
     }
 
-    public void setBatchIterations(int batchIterations) {
+    public BenchmarkConfig withBatchIterations(int batchIterations) {
         this.batchIterations = batchIterations;
+        return this;
     }
 
     public float getWarmupFactor() {
         return warmupFactor;
     }
 
-    public void setWarmupFactor(float warmupFactor) {
+    public BenchmarkConfig withWarmupFactor(float warmupFactor) {
         this.warmupFactor = warmupFactor;
+        return this;
     }
 
     public BenchmarkTableBuilderSettings getTableOptions() {
         return tableOptions;
     }
 
-    public void setTableOptions(BenchmarkTableBuilderSettings tableOptions) {
+    public BenchmarkConfig withTableOptions(BenchmarkTableBuilderSettings tableOptions) {
         this.tableOptions = tableOptions;
+        return this;
     }
 }

@@ -21,8 +21,7 @@ public class Bench4jTest {
 
 
     static {
-        testConfig = new BenchmarkConfig();
-        testConfig.setTargetBatchTimeSec(testTargetBatchTime);
+        testConfig = new BenchmarkConfig().withTargetBatchTimeSec(testTargetBatchTime);
     }
 
     @Test
