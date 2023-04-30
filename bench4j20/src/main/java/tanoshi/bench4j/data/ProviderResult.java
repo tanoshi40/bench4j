@@ -44,7 +44,7 @@ public class ProviderResult {
         String[] headers = options.getHeaders();
         String[][] content = options.getTableContent(execResults);
 
-        return new Table(headers, content, providerName);
+        return Table.builder(headers, content).withTitle(providerName).build();
     }
 
     public String toView(BenchmarkTableBuilderSettings options) {

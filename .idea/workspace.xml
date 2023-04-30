@@ -5,41 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="465bdb81-936d-40de-beb3-bcac5e63adb1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/bench4j.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/Benchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/BenchmarkClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/GCMemoryTesting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/MemoryTesting.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/ProductManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/AbstractProduct.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/BrandedProduct.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/ElectronicGood.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/GroceryProduct.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/LuxuryGood.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/console/src/main/java/tanoshi/gcMemTesting/models/ProductGroup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/releases/1.0.0/bench4j20-1.0.0-RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/colors/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/ProviderResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/ProviderResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/Color.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/TODOS" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/TODOS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/testdata/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/units/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/units/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/models/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/models/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,6 +48,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2PA6urgye3OymstmQyO4re8C76O" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -62,17 +58,78 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "refactoring-to-use-reflections-and-annotations-instead-of-delegates",
     "jdk.selected.JAVA_MODULE": "openjdk-20",
     "last_opened_file_path": "E:/Programming/git/bench4j/pom.xml",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "MavenSettings"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="tanoshi.utils.tables.TableView" />
+    </key>
+  </component>
   <component name="RunManager" selected="Maven.[parent] build">
+    <configuration name="[console testing] Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="_testing" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All Tests" type="CompoundRunConfigurationType">
+      <toRun name="[bench4j]" type="JUnit" />
+      <toRun name="[colors]" type="JUnit" />
+      <toRun name="[tables]" type="JUnit" />
+      <toRun name="[units]" type="JUnit" />
+      <method v="2" />
+    </configuration>
+    <configuration name="[bench4j]" type="JUnit" factoryName="JUnit">
+      <module name="bench4j20" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="[colors]" type="JUnit" factoryName="JUnit">
+      <module name="utils.colors" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="[tables]" type="JUnit" factoryName="JUnit">
+      <module name="utils.tables" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="[units]" type="JUnit" factoryName="JUnit">
+      <module name="utils.units" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="parent" />
       <method v="2">
@@ -165,6 +222,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.[console testing] Main" />
+      <item itemvalue="Compound.All Tests" />
+      <item itemvalue="JUnit.[bench4j]" />
+      <item itemvalue="JUnit.[colors]" />
+      <item itemvalue="JUnit.[tables]" />
+      <item itemvalue="JUnit.[units]" />
       <item itemvalue="Maven.[parent] build" />
       <item itemvalue="Maven.[bench4j] build" />
       <item itemvalue="Maven.[utils] build" />

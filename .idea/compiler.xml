@@ -11,6 +11,7 @@
         <module name="bench4j20" />
         <module name="utils.tables" />
         <module name="utils.units" />
+        <module name="_testing" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
