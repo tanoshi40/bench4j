@@ -18,7 +18,6 @@
         <module>tables</module>
         <module>colors</module>
         <module>units</module>
-        <module>tmp</module>
     </modules>
 
     <properties>
