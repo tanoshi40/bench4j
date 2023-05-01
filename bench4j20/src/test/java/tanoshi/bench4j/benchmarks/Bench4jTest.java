@@ -1,7 +1,7 @@
 package tanoshi.bench4j.benchmarks;
 
 import tanoshi.bench4j.Bench4j;
-import tanoshi.bench4j.data.BenchmarkingResult;
+import tanoshi.bench4j.data.BenchmarkingRunResult;
 import tanoshi.bench4j.settings.BenchmarkConfig;
 import tanoshi.bench4j.testclasses.PersonTestDataProvider;
 import tanoshi.bench4j.testclasses.JoinedNamesResult;
@@ -29,8 +29,8 @@ public class Bench4jTest {
         Bench4j<PersonList, JoinedNamesResult> benchmark = new Bench4j<PersonList, JoinedNamesResult>().addTestDataProvider(new PersonTestDataProvider());
         Bench4j<PersonList, JoinedNamesResult> benchmark2 = new Bench4j<PersonList, JoinedNamesResult>().addTestExecutor(PersonTestNameListExecutor::getStringJoinerFinal, "list executor");
 
-        BenchmarkingResult noExecsResult = benchmark.doBenchmarks();
-        BenchmarkingResult noDataProvResult = benchmark2.doBenchmarks();
+        BenchmarkingRunResult noExecsResult = benchmark.doBenchmarks();
+        BenchmarkingRunResult noDataProvResult = benchmark2.doBenchmarks();
 
         assertNull(noExecsResult, "result should be null when no executors are provided");
         assertNull(noDataProvResult, "result should be null when no test data providers are added");
@@ -42,7 +42,7 @@ public class Bench4jTest {
                 .addTestDataProvider(new PersonTestDataProvider())
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
 
-        BenchmarkingResult result = benchmark.doBenchmarks();
+        BenchmarkingRunResult result = benchmark.doBenchmarks();
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 
@@ -59,7 +59,7 @@ public class Bench4jTest {
                                 new PersonTestDataProvider(1_000_000)));
         addAllExecutors(benchmark);
 
-        BenchmarkingResult result = benchmark.doBenchmarks();
+        BenchmarkingRunResult result = benchmark.doBenchmarks();
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 

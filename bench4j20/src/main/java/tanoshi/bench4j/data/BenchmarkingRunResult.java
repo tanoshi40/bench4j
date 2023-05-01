@@ -6,10 +6,10 @@ import tanoshi.utils.tables.models.Table;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BenchmarkingResult {
+public class BenchmarkingRunResult {
     private final Map<String, ProviderResult> providerResults;
 
-    public BenchmarkingResult() {
+    public BenchmarkingRunResult() {
         providerResults = new HashMap<>();
     }
 

@@ -58,7 +58,7 @@ public class Bench4j<TIn, TOut> {
         return this;
     }
 
-    public BenchmarkingResult doBenchmarks() {
+    public BenchmarkingRunResult doBenchmarks() {
         BenchmarkSettingsValidationResult validation = validateSetup();
         if (!validation.isValid()) {
             System.out.println(validation);
@@ -77,8 +77,8 @@ public class Bench4j<TIn, TOut> {
         return result;
     }
 
-    private BenchmarkingResult doPerformanceTests() {
-        BenchmarkingResult result = new BenchmarkingResult();
+    private BenchmarkingRunResult doPerformanceTests() {
+        BenchmarkingRunResult result = new BenchmarkingRunResult();
         for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
             result.addProviderResult(doPerformProviderBenchmarks(dataProvider));
         }

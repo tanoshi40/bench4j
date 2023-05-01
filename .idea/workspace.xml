@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="465bdb81-936d-40de-beb3-bcac5e63adb1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkingResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingRunResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,6 +63,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="tanoshi.bench4j" />
+    </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="tanoshi.utils.tables.TableView" />
     </key>
