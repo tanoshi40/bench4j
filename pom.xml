@@ -6,14 +6,28 @@
 
     <groupId>tanoshi.bench4j</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>utils</module>
         <module>bench4j20</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>local-testing</id>
+            <modules>
+                <module>_testing</module>
+            </modules>
+        </profile>
+    </profiles>
+
     <properties>
+        <!-- CI-Friendly Versioning for details and further information see:
+            https://maven.apache.org/maven-ci-friendly.html we only use 'revision' to
+            set the full qualified version -->
+        <revision>dev-SNAPSHOT</revision>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

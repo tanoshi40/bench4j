@@ -10,12 +10,9 @@
         <module name="utils.colors" />
         <module name="bench4j20" />
         <module name="utils.tables" />
-        <module name="utils.units" />
         <module name="_testing" />
+        <module name="utils.units" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="tmp" target="20" />
-    </bytecodeTargetLevel>
   </component>
 </project>

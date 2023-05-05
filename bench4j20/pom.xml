@@ -6,7 +6,7 @@
     <parent>
         <groupId>tanoshi.bench4j</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <version>2.0.0-SNAPSHOT</version>
@@ -23,19 +23,19 @@
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>testdata</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>utils.units</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>utils.tables</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

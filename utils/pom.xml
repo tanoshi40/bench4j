@@ -6,7 +6,7 @@
     <parent>
         <groupId>tanoshi.bench4j</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>utils</artifactId>
@@ -18,7 +18,6 @@
         <module>tables</module>
         <module>colors</module>
         <module>units</module>
-        <module>_testing</module>
     </modules>
 
     <properties>
