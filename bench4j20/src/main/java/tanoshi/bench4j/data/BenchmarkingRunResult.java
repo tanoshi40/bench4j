@@ -41,6 +41,6 @@ public class BenchmarkingRunResult {
     }
 
     public String toView(BenchmarkTableBuilderSettings options) {
-        return TableView.build(toTables(options), options.getHeaders(), null, options.getTableSettings()).toString();
+        return TableView.build(toTables(options), options.getHeaders(), null, options.getTableSettings()).toView();
     }
 }

@@ -10,7 +10,7 @@ public class MicrosecondUnit extends TimeUnit {
 
     @Override
     public String shortName() {
-        return "mic";
+        return "mc";
     }
 
     @Override
