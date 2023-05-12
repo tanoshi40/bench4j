@@ -5,26 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>tanoshi.bench4j</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>utils</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>utils</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>testdata</module>
-
-        <module>tables</module>
-        <module>colors</module>
-        <module>units</module>
-        <module>timer</module>
-    </modules>
+    <artifactId>utils.timer</artifactId>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>tanoshi.bench4j</groupId>
+            <artifactId>utils.units</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

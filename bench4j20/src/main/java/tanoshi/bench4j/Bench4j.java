@@ -4,8 +4,10 @@ import org.jetbrains.annotations.NotNull;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.settings.BenchmarkSettingsValidationResult;
 import tanoshi.bench4j.settings.BenchmarkConfig;
+import tanoshi.testdata.ITestDataProvider;
 import tanoshi.utils.units.time.converter.TimeConverter;
 import tanoshi.utils.units.time.TimeUnits;
+import tanoshi.utils.timer.Timer;
 
 import java.util.*;
 import java.util.function.Function;
@@ -58,14 +60,16 @@ public class Bench4j<TIn, TOut> {
         return this;
     }
 
-    public BenchmarkingRunResult doBenchmarks() {
+    public BenchmarkingResult doBenchmarks() {
+        long startTime = Timer.getNanoTime();
         BenchmarkSettingsValidationResult validation = validateSetup();
         if (!validation.isValid()) {
-            System.out.println(validation);
-            return null;
+            return BenchmarkingResult.fromError("Invalid arguments: " + validation, config.getTableOptions());
         }
+        BenchmarkingRunResult runResult = doPerformanceTests();
 
-        return doPerformanceTests();
+        return new BenchmarkingResult(true, runResult, null,
+                TimeConverter.toMilli(TimeUnits.NANOSECONDS, Timer.getElapsedNanos(startTime)), config.getTableOptions());
     }
 
     private BenchmarkSettingsValidationResult validateSetup() {

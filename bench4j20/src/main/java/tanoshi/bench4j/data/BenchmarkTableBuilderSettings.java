@@ -59,7 +59,8 @@ public class BenchmarkTableBuilderSettings {
         return tableSettings;
     }
 
-    public void setTableSettings(TableSettings tableSettings) {
+    public BenchmarkTableBuilderSettings withTableSettings(TableSettings tableSettings) {
         this.tableSettings = tableSettings;
+        return this;
     }
 }

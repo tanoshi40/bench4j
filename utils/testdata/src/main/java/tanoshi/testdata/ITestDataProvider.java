@@ -1,4 +1,4 @@
-package tanoshi.bench4j;
+package tanoshi.testdata;
 
 public interface ITestDataProvider<T> {
 

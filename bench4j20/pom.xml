@@ -24,7 +24,7 @@
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>testdata</artifactId>
             <version>${revision}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
@@ -35,6 +35,12 @@
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>utils.tables</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>tanoshi.bench4j</groupId>
+            <artifactId>utils.timer</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>

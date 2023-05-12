@@ -1,16 +1,16 @@
 package tanoshi.bench4j.benchmarks;
 
 import tanoshi.bench4j.Bench4j;
-import tanoshi.bench4j.data.BenchmarkingRunResult;
+import tanoshi.bench4j.BenchmarkingResult;
 import tanoshi.bench4j.settings.BenchmarkConfig;
-import tanoshi.bench4j.testclasses.PersonTestDataProvider;
-import tanoshi.bench4j.testclasses.JoinedNamesResult;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import tanoshi.bench4j.testclasses.executors.PersonTestNameListExecutor;
-import tanoshi.testdata.models.PersonList;
+import tanoshi.testdata.executors.PersonTestNameListExecutor;
+import tanoshi.testdata.models.Person;
+import tanoshi.testdata.provider.PersonTestDataProvider;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,23 +26,26 @@ public class Bench4jTest {
 
     @Test
     public void testDoBenchmarksInvalidArgs() {
-        Bench4j<PersonList, JoinedNamesResult> benchmark = new Bench4j<PersonList, JoinedNamesResult>().addTestDataProvider(new PersonTestDataProvider());
-        Bench4j<PersonList, JoinedNamesResult> benchmark2 = new Bench4j<PersonList, JoinedNamesResult>().addTestExecutor(PersonTestNameListExecutor::getStringJoinerFinal, "list executor");
+        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>()
+                .addTestDataProvider(new PersonTestDataProvider());
 
-        BenchmarkingRunResult noExecsResult = benchmark.doBenchmarks();
-        BenchmarkingRunResult noDataProvResult = benchmark2.doBenchmarks();
+        Bench4j<List<Person>, String> benchmark2 = new Bench4j<List<Person>, String>()
+                .addTestExecutor(PersonTestNameListExecutor::getStringJoinerFinal, "list executor");
 
-        assertNull(noExecsResult, "result should be null when no executors are provided");
-        assertNull(noDataProvResult, "result should be null when no test data providers are added");
+        BenchmarkingResult noExecsResult = benchmark.doBenchmarks();
+        BenchmarkingResult noDataProvResult = benchmark2.doBenchmarks();
+
+        assertFalse(noExecsResult.isSuccess(), "result should be null when no executors are provided");
+        assertFalse(noDataProvResult.isSuccess(), "result should be null when no test data providers are added");
     }
 
     @Test
     public void testDoBenchmarks() {
-        Bench4j<PersonList, JoinedNamesResult> benchmark = new Bench4j<PersonList, JoinedNamesResult>(testConfig)
+        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>(testConfig)
                 .addTestDataProvider(new PersonTestDataProvider())
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
 
-        BenchmarkingRunResult result = benchmark.doBenchmarks();
+        BenchmarkingResult result = benchmark.doBenchmarks();
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 
@@ -51,7 +54,7 @@ public class Bench4jTest {
 
     @Test
     public void testDoBenchmarksWithMultipleTestDataProvidersAndExecutors() {
-        Bench4j<PersonList, JoinedNamesResult> benchmark = new Bench4j<PersonList, JoinedNamesResult>(testConfig)
+        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>(testConfig)
                 .addTestDataProvider(
                         Arrays.asList(
                                 new PersonTestDataProvider(),
@@ -59,7 +62,7 @@ public class Bench4jTest {
                                 new PersonTestDataProvider(1_000_000)));
         addAllExecutors(benchmark);
 
-        BenchmarkingRunResult result = benchmark.doBenchmarks();
+        BenchmarkingResult result = benchmark.doBenchmarks();
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 
@@ -67,13 +70,14 @@ public class Bench4jTest {
     }
 
 
-    private static void addAllExecutors(Bench4j<PersonList, JoinedNamesResult> benchmark) {
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStream, "stream");
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStreamToListToStringJoin, "stream to list");
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStringBuilder, "string builder");
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStringJoiner, "string joiner");
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStringJoin, "string join");
-        benchmark.addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
+    private static void addAllExecutors(Bench4j<List<Person>, String> benchmark) {
+        benchmark
+                .addTestExecutor(PersonTestNameListExecutor::getStream, "stream")
+                .addTestExecutor(PersonTestNameListExecutor::getStreamToListToStringJoin, "stream to list")
+                .addTestExecutor(PersonTestNameListExecutor::getStringBuilder, "string builder")
+                .addTestExecutor(PersonTestNameListExecutor::getStringJoiner, "string joiner")
+                .addTestExecutor(PersonTestNameListExecutor::getStringJoin, "string join")
+                .addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
     }
 }
 

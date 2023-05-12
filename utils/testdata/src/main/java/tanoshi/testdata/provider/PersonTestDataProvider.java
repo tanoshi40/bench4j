@@ -1,15 +1,11 @@
-package tanoshi.bench4j.testclasses;
+package tanoshi.testdata.provider;
 
-import tanoshi.bench4j.ITestDataProvider;
+import tanoshi.testdata.ITestDataProvider;
 import tanoshi.testdata.models.Person;
-import tanoshi.testdata.models.PersonList;
-import tanoshi.testdata.provider.PersonProvider;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class PersonTestDataProvider implements ITestDataProvider<PersonList> {
+public class PersonTestDataProvider implements ITestDataProvider<List<Person>> {
 
     private final int testDataSize;
     private final List<Person> persons;
@@ -23,8 +19,8 @@ public class PersonTestDataProvider implements ITestDataProvider<PersonList> {
     }
 
     @Override
-    public PersonList getTestData() {
-        return new PersonList(persons);
+    public List<Person> getTestData() {
+        return persons;
     }
 
     @Override

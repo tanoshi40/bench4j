@@ -1,7 +1,6 @@
 package tanoshi.testdata.provider;
 
 import tanoshi.testdata.models.Person;
-import tanoshi.testdata.models.PersonList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +50,5 @@ public class PersonProvider {
         }
 
         return persons;
-    }
-
-    public static PersonList getPersonList(int size) {
-        return new PersonList(getPersons(size));
     }
 }

@@ -7,14 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="testdata" />
+        <module name="utils.timer" />
+        <module name="_testing" />
         <module name="utils.colors" />
         <module name="bench4j20" />
         <module name="utils.tables" />
         <module name="utils.units" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="_testing" target="20" />
-    </bytecodeTargetLevel>
   </component>
 </project>
