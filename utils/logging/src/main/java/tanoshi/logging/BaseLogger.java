@@ -4,11 +4,18 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class BaseLogger implements ILogger {
-    protected static final String defaultFormat = "[<lvl>] - [<name>]: <msg>";
+    protected static final String defaultFormat = "<time> [<lvl>] - [<name>]: <msg>";
+    protected static final String defaultTimeFormat = ""; // TODO: 13/05/2023
 
     protected String loggerName;
-    protected final String format;
+    protected String format = defaultFormat;
+    protected String timeFormat = defaultTimeFormat;
     protected Level loglevel = Level.INFO;
+
+    protected BaseLogger(String loggerName, String format, String timeFormat) {
+        this.loggerName = loggerName;
+        this.format = format;
+    }
 
     protected BaseLogger(String loggerName, String format) {
         this.loggerName = loggerName;
@@ -138,7 +145,12 @@ public abstract class BaseLogger implements ILogger {
         return format
                 .replace("<lvl>", loglevel.toString())
                 .replace("<msg>", message)
-                .replace("<name>", loggerName);
+                .replace("<name>", loggerName)
+                .replace("<time>", formatTime());
+    }
+
+    protected String formatTime() {
+        return ""; // TODO: 13/05/2023
     }
 
     protected abstract void writeMessage(String message);

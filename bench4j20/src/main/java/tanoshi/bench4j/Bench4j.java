@@ -13,7 +13,6 @@ import java.util.*;
 import java.util.function.Function;
 
 // TODO: v2
-//  - replace initial concept with more easy @annotations or reflection
 //  - add coloring
 //  - add better way to create testdata -> for example use maps
 //  - add heap/memory stats
