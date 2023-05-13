@@ -5,22 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>tanoshi.bench4j</groupId>
-        <artifactId>parent</artifactId>
+        <artifactId>utils</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>utils</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>testdata</module>
-
-        <module>tables</module>
-        <module>colors</module>
-        <module>units</module>
-        <module>timer</module>
-        <module>logging</module>
-    </modules>
+    <artifactId>utils.logging</artifactId>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>

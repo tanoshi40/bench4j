@@ -5,34 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/testdata/src/test/resources/snapshot.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/timer/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/timer/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/timer/src/main/java/tanoshi/utils/timer/Timer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logging/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logging/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/BaseLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ConsoleLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ILogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkingResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkingResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/ITestDataProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/ITestDataProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/testclasses/PersonTestDataProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/provider/PersonTestDataProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/testclasses/executors/PersonTestNameListExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/executors/PersonTestNameListExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/testclasses/executors/PersonTestNameListExecutorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/src/test/java/tanoshi/testdata/executors/PersonTestNameListExecutorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/testclasses/executors/__snapshots__/PersonTestNameListExecutorTest.snap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/BenchmarkRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/utils/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/models/PersonList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/provider/PersonProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/testdata/src/main/java/tanoshi/testdata/provider/PersonProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -84,11 +79,14 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "20",
     "last_directory_selection": "D:/Programming/git/bench4j/utils/timer/src/main/java/tanoshi",
-    "last_opened_file_path": "D:/Programming/git/bench4j/utils/testdata/src/test/resources",
+    "last_opened_file_path": "D:/Programming/git/bench4j",
     "settings.editor.selected.configurable": "MavenSettings"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="tanoshi.bench4j.logging" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Programming\git\bench4j\utils\testdata\src\test\resources" />
     </key>
@@ -101,7 +99,7 @@
       <recent name="tanoshi.testdata.executors" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.[Tests] all">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tanoshi.Main" />
       <module name="_testing" />

@@ -44,6 +44,12 @@
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>tanoshi</groupId>
+            <artifactId>utils.logging</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

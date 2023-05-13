@@ -3,7 +3,10 @@ package tanoshi.bench4j;
 import tanoshi.bench4j.annotations.Benchmark;
 import tanoshi.bench4j.annotations.BenchmarkClass;
 import tanoshi.bench4j.data.*;
+import tanoshi.bench4j.logging.BenchLogger;
 import tanoshi.bench4j.settings.BenchmarkConfig;
+import tanoshi.logging.ConsoleLogger;
+import tanoshi.logging.ILogger;
 import tanoshi.utils.timer.Timer;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
@@ -15,7 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BenchmarkRunner<T> {
+public class Bench4jV2<T> {
+    private static final ILogger BENCH_LOGGER = new ConsoleLogger(Bench4jV2.class);
 
     // TODO: 01.05.2023 change response to BenchmarkingResult
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) throws IllegalArgumentException {
@@ -27,8 +31,9 @@ public class BenchmarkRunner<T> {
             config = new BenchmarkConfig();
         }
 
+        String benchName = benchmarkingClass.getName();
         if (!benchmarkingClass.isAnnotationPresent(BenchmarkClass.class)) {
-            return BenchmarkingResult.fromError( "Annotation " + BenchmarkClass.class.getName() + " is not present on class " + benchmarkingClass.getName(), config.getTableOptions());
+            return BenchmarkingResult.fromError( "Annotation " + BenchmarkClass.class.getName() + " is not present on class " + benchName, config.getTableOptions());
         }
 
         Constructor<T> constructor;
@@ -44,7 +49,6 @@ public class BenchmarkRunner<T> {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             return BenchmarkingResult.fromError("Benchmarking class constructor could not get instantiated", e);
         }
-
 
         List<Method> benchMethods = new ArrayList<>();
 
@@ -62,16 +66,17 @@ public class BenchmarkRunner<T> {
                     return BenchmarkingResult.fromError("Failed to invoke benchmarking method " + method.getName(), e);
                 }
 
-                System.out.println(method.getName());
+                BENCH_LOGGER.info(method.getName());
                 benchMethods.add(method);
             }
         }
 
         if (benchMethods.isEmpty()) {
-            return BenchmarkingResult.fromError("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchmarkingClass.getName(), config.getTableOptions());
+            return BenchmarkingResult.fromError("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName, config.getTableOptions());
         }
 
-        BenchmarkRunner<T> runner = new BenchmarkRunner<>(config, benchmarkingClass, instance, benchMethods);
+        BenchLogger logger = new BenchLogger(benchName);
+        Bench4jV2<T> runner = new Bench4jV2<>(config, benchmarkingClass, instance, benchMethods, logger);
         return runner.doBenchmarks();
     }
 
@@ -80,13 +85,14 @@ public class BenchmarkRunner<T> {
     private final Class<T> benchClass;
     private final List<Method> benchMethods;
     private final T classInstance;
+    private final BenchLogger logger;
 
-    private BenchmarkRunner(BenchmarkConfig config, Class<T> benchClass, T classInstance, List<Method> benchMethods) {
+    private Bench4jV2(BenchmarkConfig config, Class<T> benchClass, T classInstance, List<Method> benchMethods, BenchLogger logger) {
         this.config = config;
-
         this.benchClass = benchClass;
         this.benchMethods = benchMethods;
         this.classInstance = classInstance;
+        this.logger = logger;
     }
 
     private BenchmarkingResult doBenchmarks() {
@@ -97,13 +103,13 @@ public class BenchmarkRunner<T> {
         runResult.addProviderResult(doPerformProviderBenchmarks("default provider"));
         //}
 
-        System.out.println(runResult.toView(config.getTableOptions()));
+        logger.info(runResult.toView(config.getTableOptions()));
         return new BenchmarkingResult(true, runResult, err, TimeConverter.toMilli(TimeUnits.NANOSECONDS,
                 Timer.getElapsedNanos(startTime)), config.getTableOptions());
     }
 
     private ProviderResult doPerformProviderBenchmarks(String providerName) {
-        System.out.printf("%n%n[%s] Running benchmarks for provider%n", providerName);
+        logger.info("%n%n[%s] Running benchmarks for provider%n", providerName);
         int batchSize = calculateTargetBatchSize(providerName);
 
         ProviderResult providerRes = new ProviderResult(providerName);
@@ -115,12 +121,12 @@ public class BenchmarkRunner<T> {
             providerRes.addExecutorRes(execRes);
         }
 
-        System.out.println(providerRes.toView(config.getTableOptions()));
+        logger.info(providerRes.toView(config.getTableOptions()));
         return providerRes;
     }
 
     private int calculateTargetBatchSize(String providerName) {
-        System.out.printf("[%s] Calculating batch sizes%n", providerName);
+        logger.info("[%s] Calculating batch sizes%n", providerName);
 
         double slowestDuration = 0;
         Method slowestExec = null;
@@ -147,7 +153,7 @@ public class BenchmarkRunner<T> {
         double targetBatchNano = TimeConverter.toNano(TimeUnits.SECONDS, config.getTargetBatchTimeSec());
 
         int calcBatchSize = Math.min((int) Math.round(targetBatchNano / calcAvrExecNanos), config.getMaxBatchSize());
-        System.out.printf("[%s] Calculated batch size: %d%n", providerName, calcBatchSize);
+        logger.info("[%s] Calculated batch size: %d%n", providerName, calcBatchSize);
 
         return calcBatchSize;
     }
@@ -157,10 +163,10 @@ public class BenchmarkRunner<T> {
                                                        String providerName,
                                                        String executorName,
                                                        int targetBatchSize) {
-        System.out.printf("%n[%s]/[%s] Running benchmarks for executor%n%n", providerName, executorName);
+        logger.info("%n[%s]/[%s] Running benchmarks for executor%n%n", providerName, executorName);
         ExecutorResult execRes = new ExecutorResult(executorName);
         WarmupResult warmupRes = doWarmup(method, executorName, targetBatchSize);
-        System.out.printf("[%s] Executing benchmarks%n", executorName);
+        logger.info("[%s] Executing benchmarks%n", executorName);
         execRes.setWarmupRes(warmupRes);
         execRes.setBatchSize(targetBatchSize);
 
@@ -168,14 +174,14 @@ public class BenchmarkRunner<T> {
             execRes.addBatch(performBatch(method, targetBatchSize));
         }
 
-        System.out.printf("[%s] %s%n", executorName, execRes);
+        logger.info("[%s] %s%n", executorName, execRes);
         return execRes;
     }
 
     private WarmupResult doWarmup(Method method,
                                   String executorName,
                                   int targetBatchSize) {
-        System.out.printf("[%s] Benchmark warmup%n", executorName);
+        logger.info("[%s] Benchmark warmup%n", executorName);
         WarmupResult warmupResult = new WarmupResult();
         int batchSize = 0;
         for (int i = 2; batchSize <= Math.round(targetBatchSize * config.getWarmupFactor()); i++) {
@@ -188,7 +194,7 @@ public class BenchmarkRunner<T> {
         }
 
         warmupResult.setReachedBatchSize(batchSize);
-        System.out.printf("[%s] %s%n", executorName, warmupResult);
+        logger.info("[%s] %s%n", executorName, warmupResult);
         return warmupResult;
     }
 
@@ -215,7 +221,7 @@ public class BenchmarkRunner<T> {
             times[i] = ed - st;
 
             if (ed - testStart > maxDuration) {
-                System.out.println("canceling batch (max time reached)");
+                logger.info("canceling batch (max time reached)");
                 break;
             }
         }
@@ -227,8 +233,9 @@ public class BenchmarkRunner<T> {
 
         BatchResult batchResult = new BatchResult(average, totalDuration, min, max, runs);
         if (!silent) {
-            System.out.println(batchResult);
+            logger.info(batchResult);
         }
         return batchResult;
     }
 }
+
