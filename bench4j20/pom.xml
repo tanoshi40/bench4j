@@ -13,12 +13,6 @@
 
     <artifactId>bench4j20</artifactId>
 
-    <properties>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
@@ -47,6 +41,12 @@
         <dependency>
             <groupId>tanoshi.bench4j</groupId>
             <artifactId>utils.logging</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>tanoshi.bench4j</groupId>
+            <artifactId>utils.colors</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
