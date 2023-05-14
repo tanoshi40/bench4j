@@ -16,9 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Bench4jTest {
 
-    private static final double testTargetBatchTime = 0.1;
+    private static final double testTargetBatchTime = 0.05;
     private static final BenchmarkConfig testConfig;
-
 
     static {
         testConfig = new BenchmarkConfig().withTargetBatchTimeSec(testTargetBatchTime);

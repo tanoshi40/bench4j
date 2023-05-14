@@ -7,17 +7,27 @@ import tanoshi.utils.tables.models.TableSettings;
 
 public class BenchmarkConfig {
 
-    private double targetBatchTimeSec = 2;
-    private double maxBatchTimeSec = 10;
-    private int maxBatchSize = (int) Math.pow(2, 25);
-    private int batchIterations = 25;
-    private float warmupFactor = 0.5f;
-    private ConsoleTextColor highlightColor = Color.MAGENTA.consoleColor();
-    private ConsoleTextColor secondaryColor = Color.CYAN.consoleColor();
+    private double targetBatchTimeSec;
+    private double maxBatchTimeSec;
+    private int maxBatchSize;
+    private int batchIterations;
+    private float warmupFactor;
+    private ConsoleTextColor highlightColor;
+    private ConsoleTextColor secondaryColor;
 
-    private BenchmarkTableBuilderSettings tableOptions = new BenchmarkTableBuilderSettings()
-            .withTableSettings(new TableSettings().withContentColor(highlightColor));
+    private BenchmarkTableBuilderSettings tableOptions;
 
+    public BenchmarkConfig() {
+        this.targetBatchTimeSec = 2;
+        this.maxBatchTimeSec = 10;
+        this.maxBatchSize = (int) Math.pow(2, 25);
+        this.batchIterations = 25;
+        this.warmupFactor = 0.5f;
+        this.highlightColor = Color.MAGENTA.consoleColor();
+        this.secondaryColor = Color.WHITE.consoleColor();
+        this.tableOptions = new BenchmarkTableBuilderSettings()
+                .withTableSettings(new TableSettings().withContentColor(highlightColor));
+    }
 
     public double getTargetBatchTimeSec() {
         return targetBatchTimeSec;

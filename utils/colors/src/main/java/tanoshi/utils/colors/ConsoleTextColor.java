@@ -42,6 +42,24 @@ public class ConsoleTextColor {
         return backColor;
     }
 
+    public String getColorCode() {
+        Color frColor = textColor;
+        if (frColor == null) {
+            frColor = Color.WHITE;
+        }
+
+        TextColorType frType = this.textType;
+        if (frType == null) {
+            frType = TextColorType.NORMAL;
+        }
+
+        if (backColor == null || backType == null) {
+            return frType.getColorCode(frColor);
+        }
+
+        return frType.getColorCode(frColor) + backType.getColorCode(backColor);
+    }
+
     public TextColorType getTextType() {
         return textType;
     }

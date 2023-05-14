@@ -102,7 +102,7 @@ public enum Color {
     }
 
     public String colorizeText(String text) {
-        return ColorUtils.colorizeText(text, this, null, null, null);
+        return ColorUtils.colorizeText(text, this.getCode());
     }
 
     public String getReset() { return AsciiColorCodes.RESET; }

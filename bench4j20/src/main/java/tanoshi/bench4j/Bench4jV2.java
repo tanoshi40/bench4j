@@ -27,7 +27,7 @@ public class Bench4jV2<T> {
         }
 
         String benchName = benchmarkingClass.getName();
-        BenchLogger logger = new BenchLogger(benchName);
+        BenchLogger logger = new BenchLogger(benchName, config.getHighlightColor(), config.getSecondaryColor());
 
         logger.info("Creating an instance of '%s' class", benchmarkingClass.getTypeName());
         Constructor<T> constructor;
