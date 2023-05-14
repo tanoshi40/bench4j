@@ -57,73 +57,73 @@ public abstract class BaseLogger implements ILogger {
 
 
     @Override
-    public void debug(Object message) {
-        log(Level.DEBUG, message);
+    public BaseLogger debug(Object message) {
+        return log(Level.DEBUG, message);
     }
 
     @Override
-    public void debug(String message) {
-        log(Level.DEBUG, message);
+    public BaseLogger debug(String message) {
+        return log(Level.DEBUG, message);
     }
 
     @Override
-    public void debug(String format, Object... args) {
-        log(Level.DEBUG, format, args);
+    public BaseLogger debug(String format, Object... args) {
+        return log(Level.DEBUG, format, args);
     }
 
     @Override
-    public void info(Object message) {
-        log(Level.INFO, message);
+    public BaseLogger info(Object message) {
+        return log(Level.INFO, message);
     }
 
     @Override
-    public void info(String message) {
-        log(Level.INFO, message);
+    public BaseLogger info(String message) {
+        return log(Level.INFO, message);
     }
 
     @Override
-    public void info(String format, Object... args) {
-        log(Level.INFO, format, args);
+    public BaseLogger info(String format, Object... args) {
+        return log(Level.INFO, format, args);
     }
 
     @Override
-    public void warn(Object message) {
-        log(Level.WARN, message);
+    public BaseLogger warn(Object message) {
+        return log(Level.WARN, message);
     }
 
     @Override
-    public void warn(String message) {
-        log(Level.WARN, message);
+    public BaseLogger warn(String message) {
+        return log(Level.WARN, message);
     }
 
     @Override
-    public void warn(String format, Object... args) {
-        log(Level.WARN, format, args);
+    public BaseLogger warn(String format, Object... args) {
+        return log(Level.WARN, format, args);
     }
 
     @Override
-    public void error(Object message) {
-        log(Level.ERROR, message);
+    public BaseLogger error(Object message) {
+        return log(Level.ERROR, message);
     }
 
     @Override
-    public void error(String message) {
-        log(Level.ERROR, message);
+    public BaseLogger error(String message) {
+        return log(Level.ERROR, message);
     }
 
     @Override
-    public void error(String format, Object... args) {
-        log(Level.ERROR, format, args);
+    public BaseLogger error(String format, Object... args) {
+        return log(Level.ERROR, format, args);
     }
 
     @Override
-    public void error(String format, Exception ex, Object... args) {
-        error(format.formatted(args), ex);
+    public BaseLogger error(String format, Exception ex, Object... args) {
+        return error(format.formatted(args), ex);
     }
 
     @Override
-    public void error(String message, Exception ex) {
-        log(Level.ERROR, "%s: %s%n%s".formatted(
+    public BaseLogger error(String message, Exception ex) {
+        return log(Level.ERROR, "%s: %s%n%s".formatted(
                 message,
                 ex.getMessage(),
                 Arrays.stream(ex.getStackTrace())
@@ -134,20 +134,21 @@ public abstract class BaseLogger implements ILogger {
 
 
     @Override
-    public void log(Level loglevel, Object message) {
-        log(loglevel, message != null ? message.toString() : "null");
+    public BaseLogger log(Level loglevel, Object message) {
+        return log(loglevel, message != null ? message.toString() : "null");
     }
 
     @Override
-    public void log(Level loglevel, String format, Object... args) {
-        log(loglevel, format.formatted(args));
+    public BaseLogger log(Level loglevel, String format, Object... args) {
+        return log(loglevel, format.formatted(args));
     }
 
     @Override
-    public void log(Level loglevel, String message) {
+    public BaseLogger log(Level loglevel, String message) {
         if (canLog(loglevel)) {
             writeMessage(formatMessage(loglevel, message));
         }
+        return this;
     }
 
     private boolean canLog(Level loglevel) {
@@ -156,16 +157,25 @@ public abstract class BaseLogger implements ILogger {
 
 
     @Override
-    public void emptyLine(Level loglevel) {
+    public BaseLogger emptyLine(Level loglevel) {
         if (canLog(loglevel)) {
             writeMessage("");
         }
+        return this;
     }
 
-    public void emptyLine() {
+    public BaseLogger emptyLine() {
         if (canLog(Level.INFO)) {
             writeMessage("");
         }
+        return this;
+    }
+
+    public BaseLogger emptyLines(int lineCount) {
+        for (int i = 0; i < lineCount; i++) {
+            emptyLine();
+        }
+        return this;
     }
 
     @Override
@@ -174,8 +184,9 @@ public abstract class BaseLogger implements ILogger {
     }
 
     @Override
-    public void setLogLevel(Level level) {
+    public BaseLogger withLogLevel(Level level) {
         loglevel = level;
+        return this;
     }
 
 
@@ -195,5 +206,5 @@ public abstract class BaseLogger implements ILogger {
         return LocalDateTime.now().format(dateTimeFormatter);
     }
 
-    protected abstract void writeMessage(String message);
+    protected abstract BaseLogger writeMessage(String message);
 }

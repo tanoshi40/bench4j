@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkParameters.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkParametersBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkTableBuilderSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/ITableRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/ITableRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/settings/TableFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/settings/TableStyle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/TableView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/models/TableSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/main/java/tanoshi/utils/tables/settings/TableSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tables/src/test/java/tanoshi/utils/tables/TableViewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/BaseLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/BaseLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ConsoleLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ConsoleLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ILogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/ILogger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,7 @@
       <recent name="tanoshi.testdata.executors" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.[utils.tables] all">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tanoshi.Main" />
       <module name="_testing" />

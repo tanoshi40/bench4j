@@ -11,7 +11,7 @@ public class BenchLogger extends ConsoleLogger {
     private static final String FORMAT_COLOR_RESET = "<col_res>";
 
     static {
-        benchLoggerFormat = "%s[%s:%s]%s: %s%s".formatted(FORMAT_COLOR, FORMAT_LOGGER_NAME, FORMAT_LOG_LEVEL, FORMAT_PREFIX, FORMAT_MESSAGE, FORMAT_COLOR_RESET);
+        benchLoggerFormat = "%s[%s]%s: %s%s".formatted(FORMAT_COLOR, FORMAT_LOG_LEVEL, FORMAT_PREFIX, FORMAT_MESSAGE, FORMAT_COLOR_RESET);
     }
 
     private boolean hasProvider = false;
@@ -35,7 +35,7 @@ public class BenchLogger extends ConsoleLogger {
         return this;
     }
 
-    public BenchLogger removeProvider(String providerName) {
+    public BenchLogger removeProvider() {
         hasProvider = false;
         updatePrefix();
         return this;
@@ -48,7 +48,7 @@ public class BenchLogger extends ConsoleLogger {
         return this;
     }
 
-    public BenchLogger removeExecutor(String executorName) {
+    public BenchLogger removeExecutor() {
         hasExecutor = false;
         updatePrefix();
         return this;

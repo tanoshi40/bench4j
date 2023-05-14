@@ -19,7 +19,8 @@ public class ConsoleLogger extends BaseLogger {
     }
 
     @Override
-    protected void writeMessage(String message) {
+    protected ConsoleLogger writeMessage(String message) {
         System.out.println(message);
+        return this;
     }
 }

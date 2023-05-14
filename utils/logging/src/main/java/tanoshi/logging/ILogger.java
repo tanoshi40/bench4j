@@ -1,51 +1,51 @@
 package tanoshi.logging;
 
 public interface ILogger {
-    void info(Object message);
+    ILogger info(Object message);
 
-    void info(String message);
+    ILogger info(String message);
 
-    void info(String format, Object... args);
-
-
-    void debug(Object message);
-
-    void debug(String message);
-
-    void debug(String format, Object... args);
+    ILogger info(String format, Object... args);
 
 
-    void warn(Object message);
+    ILogger debug(Object message);
 
-    void warn(String message);
+    ILogger debug(String message);
 
-    void warn(String format, Object... args);
-
-
-    void error(Object message);
-
-    void error(String message);
-
-    void error(String format, Object... args);
-
-    void error(String message, Exception ex);
-
-    void error(String format, Exception ex, Object... args);
+    ILogger debug(String format, Object... args);
 
 
-    void log(Level loglevel, Object message);
+    ILogger warn(Object message);
 
-    void log(Level loglevel, String message);
+    ILogger warn(String message);
 
-    void log(Level loglevel, String format, Object... args);
+    ILogger warn(String format, Object... args);
 
 
-    void emptyLine(Level loglevel);
+    ILogger error(Object message);
+
+    ILogger error(String message);
+
+    ILogger error(String format, Object... args);
+
+    ILogger error(String message, Exception ex);
+
+    ILogger error(String format, Exception ex, Object... args);
+
+
+    ILogger log(Level loglevel, Object message);
+
+    ILogger log(Level loglevel, String message);
+
+    ILogger log(Level loglevel, String format, Object... args);
+
+
+    ILogger emptyLine(Level loglevel);
 
 
     Level getLogLevel();
 
-    void setLogLevel(Level level);
+    ILogger withLogLevel(Level level);
 
 
     enum Level {
