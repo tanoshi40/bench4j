@@ -12,11 +12,17 @@ public class ErrorMessage {
     }
 
     public ErrorMessage(String message, Exception e) {
-        this(message + ": " + e.getMessage() + "\n" + Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.joining("\n")));
+        this("%s: %s%n%s".formatted(message, e.getMessage(),
+                Arrays.stream(e.getStackTrace())
+                        .map(StackTraceElement::toString)
+                        .collect(Collectors.joining("\n"))));
     }
 
     public ErrorMessage(Exception e) {
-        this(e.getMessage() + "\n" + Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.joining("\n")));
+        this("%s%n%s".formatted(e.getMessage(),
+                Arrays.stream(e.getStackTrace())
+                        .map(StackTraceElement::toString)
+                        .collect(Collectors.joining("\n"))));
     }
 
     public String getMessage() {
