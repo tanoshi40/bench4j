@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingRunResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingRunResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/ProviderResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/ProviderResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/AsciiColorCodes.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/AsciiColorCodes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/ColorUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/ColorUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/ConsoleTextColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/colors/src/main/java/tanoshi/utils/colors/ConsoleTextColor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +92,7 @@
       <recent name="tanoshi.testdata.executors" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Compound.[Tests] all">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tanoshi.Main" />
       <module name="_testing" />
@@ -114,7 +107,11 @@
       </method>
     </configuration>
     <configuration name="[Tests] all" type="CompoundRunConfigurationType">
+      <toRun name="[Tests] benchmarking all" type="CompoundRunConfigurationType" />
       <toRun name="[Tests] utils all" type="CompoundRunConfigurationType" />
+      <method v="2" />
+    </configuration>
+    <configuration name="[Tests] benchmarking all" type="CompoundRunConfigurationType">
       <toRun name="[bench4j] all" type="JUnit" />
       <method v="2" />
     </configuration>
@@ -283,6 +280,7 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Compound.[Tests] all" />
+      <item itemvalue="Compound.[Tests] benchmarking all" />
       <item itemvalue="Compound.[Tests] utils all" />
       <item itemvalue="JUnit.[bench4j] all" />
       <item itemvalue="JUnit.[utils.colors] all" />

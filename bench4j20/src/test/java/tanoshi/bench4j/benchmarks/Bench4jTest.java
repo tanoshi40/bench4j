@@ -2,12 +2,17 @@ package tanoshi.bench4j.benchmarks;
 
 import tanoshi.bench4j.Bench4j;
 import tanoshi.bench4j.BenchmarkingResult;
+import tanoshi.bench4j.data.BatchResultSet;
+import tanoshi.bench4j.data.BenchmarkingRunResult;
+import tanoshi.bench4j.data.ProviderResult;
 import tanoshi.bench4j.settings.BenchmarkConfig;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import tanoshi.testdata.ITestDataProvider;
 import tanoshi.testdata.executors.PersonTestNameListExecutor;
 import tanoshi.testdata.models.Person;
 import tanoshi.testdata.provider.PersonTestDataProvider;
@@ -46,21 +51,28 @@ public class Bench4jTest {
 
         BenchmarkingResult result = benchmark.doBenchmarks();
 
-        assertNotNull(result, "BenchmarkingResult must not be null");
 
-        assertTrue(result.isSuccess());
-        assertNotNull(result.getRunResult());
-        assertEquals(1, result.getRunResult().getProviderResults().size());
+        assertNotNull(result, "BenchmarkingResult must not be null");
+        assertTrue(result.isSuccess(), "Benchmark was not successful");
+
+        BenchmarkingRunResult runRes = result.getRunResult();
+        assertNotNull(runRes, "Benchmark has no run result");
+
+        assertEquals(1, runRes.getProviderResults().size(), "1 provider result expected");
+
+        Optional<ProviderResult> optProvRes = runRes.getProviderResults().stream().findFirst();
+        assertTrue(optProvRes.isPresent());
+        assertProvider(optProvRes.get(), 1);
     }
 
     @Test
     public void testDoBenchmarksWithMultipleTestDataProvidersAndExecutors() {
+        List<ITestDataProvider<List<Person>>> providers = Arrays.asList(
+                new PersonTestDataProvider(),
+                new PersonTestDataProvider(1_000),
+                new PersonTestDataProvider(1_000_000));
         Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>(testConfig)
-                .addTestDataProvider(
-                        Arrays.asList(
-                                new PersonTestDataProvider(),
-                                new PersonTestDataProvider(1_000),
-                                new PersonTestDataProvider(1_000_000)));
+                .addTestDataProvider(providers);
         addAllExecutors(benchmark);
 
         BenchmarkingResult result = benchmark.doBenchmarks();
@@ -69,9 +81,21 @@ public class Bench4jTest {
 
         assertTrue(result.isSuccess());
         assertNotNull(result.getRunResult());
-        assertEquals(3, result.getRunResult().getProviderResults().size());
+        assertEquals(providers.size(), result.getRunResult().getProviderResults().size());
+
+        for (ProviderResult providerResult : result.getRunResult().getProviderResults()) {
+            assertProvider(providerResult, allExecutorsCount);
+        }
     }
 
+    private static void assertProvider(ProviderResult providerResult, int expectedExecutors) {
+        assertEquals(expectedExecutors, providerResult.getExecutorResults().size(), "1 execution result expected");
+
+        for (BatchResultSet executorResult : providerResult.getExecutorResults()) {
+            assertNotNull(executorResult);
+        }
+
+    }
 
     private static void addAllExecutors(Bench4j<List<Person>, String> benchmark) {
         benchmark
@@ -82,5 +106,7 @@ public class Bench4jTest {
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoin, "string join")
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
     }
+
+    private static final int allExecutorsCount = 6;
 }
 

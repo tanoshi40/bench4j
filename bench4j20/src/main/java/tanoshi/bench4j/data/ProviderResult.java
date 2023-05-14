@@ -3,6 +3,7 @@ package tanoshi.bench4j.data;
 import tanoshi.utils.tables.TableView;
 import tanoshi.utils.tables.models.Table;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,12 @@ public class ProviderResult {
         executorResults.put(execRes.getName(), execRes);
     }
 
-    public BatchResultSet getExecutorResults(String name) {
+    public BatchResultSet getExecutorResult(String name) {
         return executorResults.get(name);
+    }
+
+    public Collection<BatchResultSet> getExecutorResults() {
+        return executorResults.values();
     }
 
     public void setTargetBatchSize(int targetBatchSize) {
