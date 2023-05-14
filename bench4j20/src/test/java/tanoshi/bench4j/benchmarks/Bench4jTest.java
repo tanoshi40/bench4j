@@ -48,7 +48,9 @@ public class Bench4jTest {
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 
-        // TODO: 17/04/2023 do proper assertion
+        assertTrue(result.isSuccess());
+        assertNotNull(result.getRunResult());
+        assertEquals(1, result.getRunResult().getProviderResults().size());
     }
 
     @Test
@@ -65,7 +67,9 @@ public class Bench4jTest {
 
         assertNotNull(result, "BenchmarkingResult must not be null");
 
-        // TODO: 17/04/2023 do proper assertion
+        assertTrue(result.isSuccess());
+        assertNotNull(result.getRunResult());
+        assertEquals(3, result.getRunResult().getProviderResults().size());
     }
 
 

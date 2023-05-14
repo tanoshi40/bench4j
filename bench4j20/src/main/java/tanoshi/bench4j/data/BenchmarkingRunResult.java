@@ -3,6 +3,7 @@ package tanoshi.bench4j.data;
 import tanoshi.utils.tables.TableView;
 import tanoshi.utils.tables.models.Table;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,10 @@ public class BenchmarkingRunResult {
 
     public ProviderResult getProviderResult(String name) {
         return providerResults.get(name);
+    }
+
+    public Collection<ProviderResult> getProviderResults() {
+        return providerResults.values();
     }
 
     @Override

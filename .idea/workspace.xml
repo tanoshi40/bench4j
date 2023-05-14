@@ -7,6 +7,7 @@
     <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingRunResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/data/BenchmarkingRunResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/logging/BenchLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/settings/BenchmarkConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jTest.java" afterDir="false" />
