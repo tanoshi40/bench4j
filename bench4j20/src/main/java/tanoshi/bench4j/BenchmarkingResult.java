@@ -2,32 +2,19 @@ package tanoshi.bench4j;
 
 import tanoshi.bench4j.data.BenchmarkTableBuilderSettings;
 import tanoshi.bench4j.data.BenchmarkingRunResult;
+import tanoshi.logging.ILogger;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
 
 public class BenchmarkingResult {
-    public static BenchmarkingResult fromError(String message, Exception e) {
-        return fromError(message + ": " + e.getMessage());
+    public static BenchmarkingResult fromError(ErrorMessage error) {
+        return fromError(error, null);
     }
 
-    public static BenchmarkingResult fromError(Exception e) {
-        return fromError(e.getMessage());
-    }
-
-    public static BenchmarkingResult fromError(String errorMessage) {
-        return new BenchmarkingResult(false, null, errorMessage, -1, new BenchmarkTableBuilderSettings());
-    }
-
-    public static BenchmarkingResult fromError(String message, Exception e, BenchmarkTableBuilderSettings displayOptions) {
-        return fromError(message + ": " + e.getMessage());
-    }
-
-    public static BenchmarkingResult fromError(Exception e, BenchmarkTableBuilderSettings displayOptions) {
-        return fromError(e.getMessage());
-    }
-
-    public static BenchmarkingResult fromError(String errorMessage, BenchmarkTableBuilderSettings displayOptions) {
-        return new BenchmarkingResult(false, null, errorMessage, -1, displayOptions);
+    public static BenchmarkingResult fromError(ErrorMessage error, ILogger logger) {
+        String message = error.getMessage();
+        if (logger != null) logger.error(message);
+        return new BenchmarkingResult(false, null, message, -1, null);
     }
 
     private final boolean success;
@@ -64,6 +51,7 @@ public class BenchmarkingResult {
     public String toView() {
         return toView(displayOptions);
     }
+
     public String toView(BenchmarkTableBuilderSettings displayOptions) {
         if (!success) {
             return "BenchmarkingResult{success=%s, errorMessage='%s'}".formatted(false, errorMessage);

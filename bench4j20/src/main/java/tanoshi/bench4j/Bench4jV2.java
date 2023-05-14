@@ -33,21 +33,21 @@ public class Bench4jV2<T> {
 
         String benchName = benchmarkingClass.getName();
         if (!benchmarkingClass.isAnnotationPresent(BenchmarkClass.class)) {
-            return BenchmarkingResult.fromError( "Annotation " + BenchmarkClass.class.getName() + " is not present on class " + benchName, config.getTableOptions());
+            return BenchmarkingResult.fromError(new ErrorMessage("Annotation " + BenchmarkClass.class.getName() + " is not present on class " + benchName), BENCH_LOGGER);
         }
 
         Constructor<T> constructor;
         try {
             constructor = benchmarkingClass.getConstructor();
         } catch (NoSuchMethodException e) {
-            return BenchmarkingResult.fromError("Benchmarking class has no empty constructor", e);
+            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class has no empty constructor", e), BENCH_LOGGER);
         }
         constructor.setAccessible(true);
         T instance;
         try {
             instance = constructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            return BenchmarkingResult.fromError("Benchmarking class constructor could not get instantiated", e);
+            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class constructor could not get instantiated", e), BENCH_LOGGER);
         }
 
         List<Method> benchMethods = new ArrayList<>();
@@ -56,14 +56,14 @@ public class Bench4jV2<T> {
             if (method.isAnnotationPresent(Benchmark.class)) {
                 // Verifying that parameters are all the same
                 if (method.getParameterCount() > 0) {
-                    return BenchmarkingResult.fromError("Benchmarking methods can not have parameters", config.getTableOptions());
+                    return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking methods can not have parameters"), BENCH_LOGGER);
                 }
 
                 try {
                     method.setAccessible(true);
                     method.invoke(instance);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    return BenchmarkingResult.fromError("Failed to invoke benchmarking method " + method.getName(), e);
+                    return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke benchmarking method " + method.getName(), e), BENCH_LOGGER);
                 }
 
                 BENCH_LOGGER.info(method.getName());
@@ -72,7 +72,7 @@ public class Bench4jV2<T> {
         }
 
         if (benchMethods.isEmpty()) {
-            return BenchmarkingResult.fromError("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName, config.getTableOptions());
+            return BenchmarkingResult.fromError(new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName), BENCH_LOGGER);
         }
 
         BenchLogger logger = new BenchLogger(benchName);

@@ -63,7 +63,7 @@ public class Bench4j<TIn, TOut> {
         long startTime = Timer.getNanoTime();
         BenchmarkSettingsValidationResult validation = validateSetup();
         if (!validation.isValid()) {
-            return BenchmarkingResult.fromError("Invalid arguments: " + validation, config.getTableOptions());
+            return BenchmarkingResult.fromError(new ErrorMessage("Invalid arguments: " + validation));
         }
         BenchmarkingRunResult runResult = doPerformanceTests();
 
