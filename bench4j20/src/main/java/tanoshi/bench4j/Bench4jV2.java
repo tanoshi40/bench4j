@@ -1,7 +1,6 @@
 package tanoshi.bench4j;
 
 import tanoshi.bench4j.annotations.Benchmark;
-import tanoshi.bench4j.annotations.BenchmarkClass;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.logging.BenchLogger;
 import tanoshi.bench4j.settings.BenchmarkConfig;
@@ -19,9 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Bench4jV2<T> {
-    private static final ILogger BENCH_LOGGER = new ConsoleLogger(Bench4jV2.class);
-
-    // TODO: 01.05.2023 change response to BenchmarkingResult
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) throws IllegalArgumentException {
         return run(benchmarkingClass, new BenchmarkConfig());
     }
@@ -32,22 +28,20 @@ public class Bench4jV2<T> {
         }
 
         String benchName = benchmarkingClass.getName();
-        if (!benchmarkingClass.isAnnotationPresent(BenchmarkClass.class)) {
-            return BenchmarkingResult.fromError(new ErrorMessage("Annotation " + BenchmarkClass.class.getName() + " is not present on class " + benchName), BENCH_LOGGER);
-        }
+        BenchLogger logger = new BenchLogger(benchName);
 
         Constructor<T> constructor;
         try {
             constructor = benchmarkingClass.getConstructor();
         } catch (NoSuchMethodException e) {
-            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class has no empty constructor", e), BENCH_LOGGER);
+            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class has no empty constructor", e), logger);
         }
         constructor.setAccessible(true);
         T instance;
         try {
             instance = constructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class constructor could not get instantiated", e), BENCH_LOGGER);
+            return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking class constructor could not get instantiated", e), logger);
         }
 
         List<Method> benchMethods = new ArrayList<>();
@@ -56,26 +50,25 @@ public class Bench4jV2<T> {
             if (method.isAnnotationPresent(Benchmark.class)) {
                 // Verifying that parameters are all the same
                 if (method.getParameterCount() > 0) {
-                    return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking methods can not have parameters"), BENCH_LOGGER);
+                    return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking methods can not have parameters"), logger);
                 }
 
                 try {
                     method.setAccessible(true);
                     method.invoke(instance);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke benchmarking method " + method.getName(), e), BENCH_LOGGER);
+                    return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke benchmarking method " + method.getName(), e), logger);
                 }
 
-                BENCH_LOGGER.info(method.getName());
+                logger.info(method.getName());
                 benchMethods.add(method);
             }
         }
 
         if (benchMethods.isEmpty()) {
-            return BenchmarkingResult.fromError(new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName), BENCH_LOGGER);
+            return BenchmarkingResult.fromError(new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName), logger);
         }
 
-        BenchLogger logger = new BenchLogger(benchName);
         Bench4jV2<T> runner = new Bench4jV2<>(config, benchmarkingClass, instance, benchMethods, logger);
         return runner.doBenchmarks();
     }
