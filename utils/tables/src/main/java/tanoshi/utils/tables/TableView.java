@@ -1,7 +1,8 @@
 package tanoshi.utils.tables;
 
 import tanoshi.utils.tables.models.Table;
-import tanoshi.utils.tables.models.TableSettings;
+import tanoshi.utils.tables.settings.TableFormat;
+import tanoshi.utils.tables.settings.TableSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,7 @@ public class TableView {
     }
 
     public static TableView build(Table table, TableSettings settings) {
-        if (settings == null) {
-            settings = new TableSettings();
-        }
+        settings = prepareSettings(settings);
 
         int[] columnWidths = TableUtils.calcColumnWidths(table);
         int totalWidth = TableUtils.adjustColumnForTitles(columnWidths, table.getTitle());
@@ -31,9 +30,7 @@ public class TableView {
     }
 
     public static TableView build(Table[] tables, String[] headers, String title, TableSettings settings) {
-        if (settings == null) {
-            settings = new TableSettings();
-        }
+        settings = prepareSettings(settings);
 
         String[] titles = new String[tables.length + 1];
         titles[0] = title;
@@ -60,6 +57,14 @@ public class TableView {
         }
 
         return tableView;
+    }
+
+    private static TableSettings prepareSettings(TableSettings settings) {
+        if (settings == null) {
+            settings = new TableSettings();
+        }
+        settings.getFormat().setLineColor(settings.getLineColor());
+        return settings;
     }
 
 

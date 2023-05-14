@@ -1,14 +1,14 @@
 package tanoshi.utils.tables;
 
 import tanoshi.utils.tables.models.Table;
-import tanoshi.utils.tables.models.TableSettings;
+import tanoshi.utils.tables.settings.TableSettings;
 
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 class TableUtils {
 
-    private static final String defaultRowFormat = "%c %s %c";
+    private static final String defaultRowFormat = "%s %s %s";
 
     enum ConnectorType {
         TOP,
@@ -17,8 +17,9 @@ class TableUtils {
     }
 
     static String buildRow(int[] columnWidths, String[] rowContent, TableSettings settings) {
-        char verticalChar = TableCharacters.CharacterType.LINE_VERTICAL.getChar();
-        StringJoiner builder = new StringJoiner(String.format(" %c ", verticalChar));
+        String verticalLine = settings.colorizedLineElement(
+                String.valueOf(TableCharacters.CharacterType.LINE_VERTICAL.getChar()));
+        StringJoiner builder = new StringJoiner(" %s ".formatted(verticalLine));
         for (int i = 0; i < rowContent.length; i++) {
             final int width = columnWidths[i];
 
@@ -28,10 +29,9 @@ class TableUtils {
 
             builder.add(colorizedEntry);
         }
-
         return switch (settings.getFormat()) {
             case MINIMAL -> builder.toString();
-            case DEFAULT, LARGE -> String.format(defaultRowFormat, verticalChar, builder, verticalChar);
+            case DEFAULT, LARGE -> defaultRowFormat.formatted(verticalLine, builder, verticalLine);
         };
     }
 
@@ -109,8 +109,9 @@ class TableUtils {
         return switch (settings.getFormat()) {
             case MINIMAL -> settings.colorizedContent(title);
             case DEFAULT, LARGE -> {
-                char verticalChar = TableCharacters.CharacterType.LINE_VERTICAL.getChar();
-                yield String.format(defaultRowFormat, verticalChar, settings.colorizedContent(buildPaddedEntry(title, totalWidth)), verticalChar);
+                String verticalLine = settings.colorizedLineElement(
+                        String.valueOf(TableCharacters.CharacterType.LINE_VERTICAL.getChar()));
+                yield String.format(defaultRowFormat, verticalLine, settings.colorizedContent(buildPaddedEntry(title, totalWidth)), verticalLine);
             }
         };
     }

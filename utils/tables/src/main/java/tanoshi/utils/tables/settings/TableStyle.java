@@ -1,4 +1,4 @@
-package tanoshi.utils.tables;
+package tanoshi.utils.tables.settings;
 
 public enum TableStyle {
     DEFAULT,

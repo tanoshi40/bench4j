@@ -3,7 +3,7 @@ package tanoshi.bench4j.settings;
 import tanoshi.bench4j.data.BenchmarkTableBuilderSettings;
 import tanoshi.utils.colors.Color;
 import tanoshi.utils.colors.ConsoleTextColor;
-import tanoshi.utils.tables.models.TableSettings;
+import tanoshi.utils.tables.settings.TableSettings;
 
 public class BenchmarkConfig {
 
@@ -26,7 +26,9 @@ public class BenchmarkConfig {
         this.highlightColor = Color.MAGENTA.consoleColor();
         this.secondaryColor = Color.WHITE.consoleColor();
         this.tableOptions = new BenchmarkTableBuilderSettings()
-                .withTableSettings(new TableSettings().withContentColor(highlightColor));
+                .withTableSettings(new TableSettings()
+                        .withContentColor(highlightColor)
+                        .withLineColor(secondaryColor));
     }
 
     public double getTargetBatchTimeSec() {

@@ -8,7 +8,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import tanoshi.testdata.models.Person;
 import tanoshi.testdata.provider.PersonProvider;
 import tanoshi.utils.tables.models.Table;
-import tanoshi.utils.tables.models.TableSettings;
+import tanoshi.utils.tables.settings.TableFormat;
+import tanoshi.utils.tables.settings.TableSettings;
 
 import java.util.List;
 

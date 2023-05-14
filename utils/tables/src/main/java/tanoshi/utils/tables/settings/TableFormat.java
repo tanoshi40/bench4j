@@ -1,4 +1,6 @@
-package tanoshi.utils.tables;
+package tanoshi.utils.tables.settings;
+
+import tanoshi.utils.colors.ConsoleTextColor;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -28,24 +30,34 @@ public enum TableFormat {
             Arrays.fill(preChars, 'h');
             builder.append(String.valueOf(preChars));
 
-            return builder.toString();
+            return colorize(builder.toString(),getLineColor());
         }
     },
     DEFAULT {
         @Override
         public String buildConnectorTemplate(int[] columnWidths) {
-            return TableFormat.buildStandardConnectorTemplate(columnWidths);
+            return colorize(buildStandardConnectorTemplate(columnWidths), getLineColor());
         }
     },
     LARGE {
         @Override
         public String buildConnectorTemplate(int[] columnWidths) {
-            return TableFormat.buildStandardConnectorTemplate(columnWidths);
+            return colorize(buildStandardConnectorTemplate(columnWidths), getLineColor());
         }
     };
 
 
+    private ConsoleTextColor lineColor = null;
+
     public abstract String buildConnectorTemplate(int[] columnWidths);
+
+    public void setLineColor(ConsoleTextColor lineColor) {
+        this.lineColor = lineColor;
+    }
+
+    ConsoleTextColor getLineColor() {
+        return lineColor;
+    }
 
     @SuppressWarnings("SpellCheckingInspection")
     private static String buildStandardConnectorTemplate(int[] columnWidths) {
@@ -62,5 +74,12 @@ public enum TableFormat {
 
         builder.append('r');
         return builder.toString();
+    }
+
+    private static String colorize(String content, ConsoleTextColor color) {
+        if (color == null) {
+            return content;
+        }
+        return color.colorizeText(content);
     }
 }

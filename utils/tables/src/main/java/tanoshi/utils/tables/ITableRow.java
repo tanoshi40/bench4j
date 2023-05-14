@@ -1,7 +1,7 @@
 package tanoshi.utils.tables;
 
 
-import tanoshi.utils.tables.models.TableSettings;
+import tanoshi.utils.tables.settings.TableSettings;
 
 interface ITableRow {
 
