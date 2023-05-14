@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/BaseLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/logging/src/main/java/tanoshi/logging/BaseLogger.java" afterDir="false" />
-    </list>
+    <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +87,7 @@
       <recent name="tanoshi.testdata.executors" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Maven.parent [clean,install]">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="tanoshi.Main" />
       <module name="_testing" />

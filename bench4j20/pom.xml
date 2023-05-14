@@ -45,7 +45,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>tanoshi</groupId>
+            <groupId>tanoshi.bench4j</groupId>
             <artifactId>utils.logging</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>
