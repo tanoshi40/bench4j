@@ -1,25 +1,46 @@
 package tanoshi.logging;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public abstract class BaseLogger implements ILogger {
-    protected static final String defaultFormat = "<time> [<lvl>] - [<name>]: <msg>";
-    protected static final String defaultTimeFormat = ""; // TODO: 13/05/2023
+    protected static final String FORMAT_TIME = "<time>";
+    protected static final String FORMAT_LOG_LEVEL = "<level>";
+    protected static final String FORMAT_LOGGER_NAME = "<name>";
+    protected static final String FORMAT_PREFIX = "<prefix>";
+    protected static final String FORMAT_MESSAGE = "<msg>";
 
-    protected String loggerName;
-    protected String format = defaultFormat;
-    protected String timeFormat = defaultTimeFormat;
+    protected static final String defaultFormat;
+
+    static {
+        defaultFormat = "%s [%s] - %s%s: %s".formatted(FORMAT_TIME, FORMAT_LOG_LEVEL, FORMAT_LOGGER_NAME, FORMAT_PREFIX, FORMAT_MESSAGE);
+    }
+
+    protected static final String defaultTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
+    protected final String loggerName;
+    protected final String format;
+
+    protected final boolean hasTimeFormat;
+    protected final String timeFormat;
+    protected final DateTimeFormatter dateTimeFormatter;
+
     protected Level loglevel = Level.INFO;
+    protected String prefix = "";
 
     protected BaseLogger(String loggerName, String format, String timeFormat) {
         this.loggerName = loggerName;
         this.format = format;
+        this.timeFormat = timeFormat;
+
+        hasTimeFormat = format.contains(FORMAT_TIME);
+        dateTimeFormatter = DateTimeFormatter.ofPattern(timeFormat);
     }
 
     protected BaseLogger(String loggerName, String format) {
-        this.loggerName = loggerName;
-        this.format = format;
+        this(loggerName, format, defaultTimeFormat);
     }
 
     protected BaseLogger(String loggerName) {
@@ -124,11 +145,28 @@ public abstract class BaseLogger implements ILogger {
 
     @Override
     public void log(Level loglevel, String message) {
-        if (loglevel.biggerEquals(getLogLevel())) {
+        if (canLog(loglevel)) {
             writeMessage(formatMessage(loglevel, message));
         }
     }
 
+    private boolean canLog(Level loglevel) {
+        return loglevel.biggerEquals(getLogLevel());
+    }
+
+
+    @Override
+    public void emptyLine(Level loglevel) {
+        if (canLog(loglevel)) {
+            writeMessage("");
+        }
+    }
+
+    public void emptyLine() {
+        if (canLog(Level.INFO)) {
+            writeMessage("");
+        }
+    }
 
     @Override
     public Level getLogLevel() {
@@ -142,15 +180,19 @@ public abstract class BaseLogger implements ILogger {
 
 
     protected String formatMessage(Level loglevel, String message) {
-        return format
-                .replace("<lvl>", loglevel.toString())
-                .replace("<msg>", message)
-                .replace("<name>", loggerName)
-                .replace("<time>", formatTime());
+        String formatted = format
+                .replace(FORMAT_LOG_LEVEL, loglevel.toString())
+                .replace(FORMAT_MESSAGE, message)
+                .replace(FORMAT_LOGGER_NAME, loggerName)
+                .replace(FORMAT_PREFIX, prefix);
+        if (hasTimeFormat) {
+            formatted = formatted.replace(FORMAT_TIME, formatTime());
+        }
+        return formatted;
     }
 
     protected String formatTime() {
-        return ""; // TODO: 13/05/2023
+        return LocalDateTime.now().format(dateTimeFormatter);
     }
 
     protected abstract void writeMessage(String message);

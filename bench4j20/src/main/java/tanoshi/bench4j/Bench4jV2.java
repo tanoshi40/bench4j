@@ -4,8 +4,6 @@ import tanoshi.bench4j.annotations.Benchmark;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.logging.BenchLogger;
 import tanoshi.bench4j.settings.BenchmarkConfig;
-import tanoshi.logging.ConsoleLogger;
-import tanoshi.logging.ILogger;
 import tanoshi.utils.timer.Timer;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
@@ -16,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Bench4jV2<T> {
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) throws IllegalArgumentException {
@@ -30,6 +29,7 @@ public class Bench4jV2<T> {
         String benchName = benchmarkingClass.getName();
         BenchLogger logger = new BenchLogger(benchName);
 
+        logger.info("Creating an instance of '%s' class", benchmarkingClass.getTypeName());
         Constructor<T> constructor;
         try {
             constructor = benchmarkingClass.getConstructor();
@@ -60,10 +60,11 @@ public class Bench4jV2<T> {
                     return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke benchmarking method " + method.getName(), e), logger);
                 }
 
-                logger.info(method.getName());
                 benchMethods.add(method);
             }
         }
+
+        logger.info("Benchmarking methods: %s", benchMethods.stream().map(Method::getName).collect(Collectors.joining(", ")));
 
         if (benchMethods.isEmpty()) {
             return BenchmarkingResult.fromError(new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchName), logger);
@@ -72,6 +73,7 @@ public class Bench4jV2<T> {
         Bench4jV2<T> runner = new Bench4jV2<>(config, benchmarkingClass, instance, benchMethods, logger);
         return runner.doBenchmarks();
     }
+
 
     private final BenchmarkConfig config;
 
@@ -90,19 +92,20 @@ public class Bench4jV2<T> {
 
     private BenchmarkingResult doBenchmarks() {
         long startTime = Timer.getNanoTime();
-        String err = "";
         BenchmarkingRunResult runResult = new BenchmarkingRunResult();
         //for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
         runResult.addProviderResult(doPerformProviderBenchmarks("default provider"));
         //}
 
         logger.info(runResult.toView(config.getTableOptions()));
-        return new BenchmarkingResult(true, runResult, err, TimeConverter.toMilli(TimeUnits.NANOSECONDS,
+        return new BenchmarkingResult(true, runResult, null, TimeConverter.toMilli(TimeUnits.NANOSECONDS,
                 Timer.getElapsedNanos(startTime)), config.getTableOptions());
     }
 
     private ProviderResult doPerformProviderBenchmarks(String providerName) {
-        logger.info("%n%n[%s] Running benchmarks for provider%n", providerName);
+        logger.withProvider(providerName);
+        logger.emptyLine();
+        logger.info("Running benchmarks for provider");
         int batchSize = calculateTargetBatchSize(providerName);
 
         ProviderResult providerRes = new ProviderResult(providerName);
