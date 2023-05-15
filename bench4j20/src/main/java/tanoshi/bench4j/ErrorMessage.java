@@ -11,14 +11,14 @@ public class ErrorMessage {
         this.message = message;
     }
 
-    public ErrorMessage(String message, Exception e) {
+    public ErrorMessage(String message, Throwable e) {
         this("%s: %s%n%s".formatted(message, e.getMessage(),
                 Arrays.stream(e.getStackTrace())
                         .map(StackTraceElement::toString)
                         .collect(Collectors.joining("\n"))));
     }
 
-    public ErrorMessage(Exception e) {
+    public ErrorMessage(Throwable e) {
         this("%s%n%s".formatted(e.getMessage(),
                 Arrays.stream(e.getStackTrace())
                         .map(StackTraceElement::toString)

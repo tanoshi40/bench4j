@@ -7,6 +7,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Use {@link tanoshi.bench4j.BenchmarkingResult} instead.
+ */
+@Deprecated(since = "2.*")
 public class BenchmarkingRunResult {
     private final Map<String, ProviderResult> providerResults;
 
