@@ -20,6 +20,7 @@
         <module>units</module>
         <module>timer</module>
         <module>logging</module>
+        <module>numbers</module>
     </modules>
 
 </project>
