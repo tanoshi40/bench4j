@@ -12,9 +12,13 @@
         <module name="_testing" />
         <module name="utils.colors" />
         <module name="bench4j20" />
+        <module name="utils.numbers" />
         <module name="utils.tables" />
         <module name="utils.units" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="numbers" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>

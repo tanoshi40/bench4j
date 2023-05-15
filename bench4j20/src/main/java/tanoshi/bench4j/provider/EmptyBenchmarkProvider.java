@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
-public class EmptyBenchmarkProvider<T> implements IBenchmarkProvider<T> {
+public class EmptyBenchmarkProvider<T> implements IBenchmarkProvider {
 
     private boolean hasNext;
 

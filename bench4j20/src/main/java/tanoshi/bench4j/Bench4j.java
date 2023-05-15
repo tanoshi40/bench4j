@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.settings.BenchmarkSettingsValidationResult;
 import tanoshi.bench4j.settings.BenchmarkConfig;
-import tanoshi.testdata.ITestDataProvider;
+import tanoshi.utils.testdata.ITestDataProvider;
 import tanoshi.utils.units.time.converter.TimeConverter;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.timer.Timer;

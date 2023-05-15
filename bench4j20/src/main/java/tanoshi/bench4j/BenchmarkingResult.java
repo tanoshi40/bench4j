@@ -2,7 +2,7 @@ package tanoshi.bench4j;
 
 import tanoshi.bench4j.data.BenchmarkTableBuilderSettings;
 import tanoshi.bench4j.data.BenchmarkingRunResult;
-import tanoshi.logging.ILogger;
+import tanoshi.utils.logging.ILogger;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
 

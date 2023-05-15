@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 
-public class BenchmarkProvider<T> implements IBenchmarkProvider<T> {
+public class BenchmarkProvider<T> implements IBenchmarkProvider {
     int index = 0;
     private final String title;
     private final Object[] values;

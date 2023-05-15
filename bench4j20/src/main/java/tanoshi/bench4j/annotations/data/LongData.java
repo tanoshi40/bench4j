@@ -1,4 +1,4 @@
-package tanoshi.bench4j.annotations;
+package tanoshi.bench4j.annotations.data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface IntTestdata {
+public @interface LongData {
     String title() default "";
-    int[] values();
+    long[] values();
 }

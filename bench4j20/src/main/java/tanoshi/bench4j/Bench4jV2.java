@@ -1,13 +1,14 @@
 package tanoshi.bench4j;
 
-import tanoshi.bench4j.annotations.*;
+import tanoshi.bench4j.annotations.Benchmark;
+import tanoshi.bench4j.annotations.TestdataInitializer;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.logging.BenchLogger;
 import tanoshi.bench4j.provider.IBenchmarkProvider;
 import tanoshi.bench4j.reflection.ReflectionHelper;
 import tanoshi.bench4j.settings.BenchmarkConfig;
 import tanoshi.bench4j.settings.BenchmarkParameters;
-import tanoshi.logging.ILogger;
+import tanoshi.utils.logging.ILogger;
 import tanoshi.utils.timer.Timer;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
@@ -31,28 +32,8 @@ import java.util.stream.Collectors;
 
 // TODO: refactor benchmarking parameters / options objects
 // TODO: more detailed benchmarking result + merge benchRes & benchRunRes
-// TODO: add providers or handling for multiple test data sets
 
 public class Bench4jV2<T> {
-
-    private static <T> IBenchmarkProvider<T> tryGetProvider(T instance, Field testdataField) throws IllegalArgumentException {
-        IntTestdata intAnnotation = testdataField.getAnnotation(IntTestdata.class);
-        if (intAnnotation != null) {
-            return IBenchmarkProvider.createProvider(instance, testdataField, intAnnotation);
-        }
-
-        StrTestdata strAnnotation = testdataField.getAnnotation(StrTestdata.class);
-        if (strAnnotation != null) {
-            return IBenchmarkProvider.createProvider(instance, testdataField, strAnnotation);
-        }
-
-        BoolTestdata boolAnnotation = testdataField.getAnnotation(BoolTestdata.class);
-        if (boolAnnotation != null) {
-            return IBenchmarkProvider.createProvider(instance, testdataField, boolAnnotation);
-        }
-
-        return null;
-    }
 
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) {
         return run(BenchmarkParameters.from(benchmarkingClass).build());
@@ -87,7 +68,7 @@ public class Bench4jV2<T> {
             }
         }
 
-        List<IBenchmarkProvider<T>> providers = new ArrayList<>();
+        List<IBenchmarkProvider> providers = new ArrayList<>();
         for (Field field : classInstance.getClass().getDeclaredFields()) {
             initMethod = testInit.get(0);
 
@@ -96,7 +77,7 @@ public class Bench4jV2<T> {
                         new ErrorMessage("TestdataInitMethod [" + initMethod.getName() + "] must have no parameters: Actual parameter count" + initMethod.getParameterCount()));
             }
             try {
-                IBenchmarkProvider<T> provider = tryGetProvider(classInstance, field);
+                IBenchmarkProvider provider = IBenchmarkProvider.tryGetProvider(classInstance, field);
                 if (provider != null) {
                     providers.add(provider);
                 }
@@ -139,9 +120,9 @@ public class Bench4jV2<T> {
     private final T classInstance;
     private final BenchLogger logger;
     private final Method initMethod;
-    private final List<IBenchmarkProvider<T>> providers;
+    private final List<IBenchmarkProvider> providers;
 
-    private Bench4jV2(BenchmarkParameters<T> args, List<Method> benchMethods, Method initMethod, List<IBenchmarkProvider<T>> providers) {
+    private Bench4jV2(BenchmarkParameters<T> args, List<Method> benchMethods, Method initMethod, List<IBenchmarkProvider> providers) {
         this.config = args.config();
         this.benchMethods = benchMethods;
         this.classInstance = args.instance();
@@ -160,7 +141,7 @@ public class Bench4jV2<T> {
         BenchmarkingRunResult runResult = new BenchmarkingRunResult();
 
         //for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
-        for (IBenchmarkProvider<T> provider : providers) {
+        for (IBenchmarkProvider provider : providers) {
             for (String providerName : provider) {
                 if (initMethod != null) {
                     try {

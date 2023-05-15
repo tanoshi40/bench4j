@@ -1,6 +1,6 @@
 package tanoshi.bench4j.logging;
 
-import tanoshi.logging.ConsoleLogger;
+import tanoshi.utils.logging.ConsoleLogger;
 import tanoshi.utils.colors.AsciiColorCodes;
 import tanoshi.utils.colors.ConsoleTextColor;
 

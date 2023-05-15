@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import tanoshi.testdata.ITestDataProvider;
-import tanoshi.testdata.executors.PersonTestNameListExecutor;
-import tanoshi.testdata.models.Person;
-import tanoshi.testdata.provider.PersonTestDataProvider;
+import tanoshi.utils.testdata.ITestDataProvider;
+import tanoshi.utils.testdata.executors.PersonTestNameListExecutor;
+import tanoshi.utils.testdata.models.Person;
+import tanoshi.utils.testdata.provider.PersonTestDataProvider;
 
 import static org.junit.jupiter.api.Assertions.*;
 
