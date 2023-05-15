@@ -1,6 +1,6 @@
 package tanoshi.bench4j.benchmarks;
 
-import tanoshi.bench4j.Bench4j;
+import tanoshi.bench4j.Bench4j_V1;
 import tanoshi.bench4j.BenchmarkingResult;
 import tanoshi.bench4j.data.BatchResultSet;
 import tanoshi.bench4j.data.BenchmarkingRunResult;
@@ -19,7 +19,7 @@ import tanoshi.utils.testdata.provider.PersonTestDataProvider;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Bench4jTest {
+public class Bench4jV1Test {
 
     private static final double testTargetBatchTime = 0.05;
     private static final BenchmarkConfig testConfig;
@@ -30,10 +30,10 @@ public class Bench4jTest {
 
     @Test
     public void testDoBenchmarksInvalidArgs() {
-        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>()
+        Bench4j_V1<List<Person>, String> benchmark = new Bench4j_V1<List<Person>, String>()
                 .addTestDataProvider(new PersonTestDataProvider());
 
-        Bench4j<List<Person>, String> benchmark2 = new Bench4j<List<Person>, String>()
+        Bench4j_V1<List<Person>, String> benchmark2 = new Bench4j_V1<List<Person>, String>()
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoinerFinal, "list executor");
 
         BenchmarkingResult noExecsResult = benchmark.doBenchmarks();
@@ -45,7 +45,7 @@ public class Bench4jTest {
 
     @Test
     public void testDoBenchmarks() {
-        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>(testConfig)
+        Bench4j_V1<List<Person>, String> benchmark = new Bench4j_V1<List<Person>, String>(testConfig)
                 .addTestDataProvider(new PersonTestDataProvider())
                 .addTestExecutor(PersonTestNameListExecutor::getStringJoinOptimized, "string join optimized");
 
@@ -71,7 +71,7 @@ public class Bench4jTest {
                 new PersonTestDataProvider(),
                 new PersonTestDataProvider(1_000),
                 new PersonTestDataProvider(1_000_000));
-        Bench4j<List<Person>, String> benchmark = new Bench4j<List<Person>, String>(testConfig)
+        Bench4j_V1<List<Person>, String> benchmark = new Bench4j_V1<List<Person>, String>(testConfig)
                 .addTestDataProvider(providers);
         addAllExecutors(benchmark);
 
@@ -97,7 +97,7 @@ public class Bench4jTest {
 
     }
 
-    private static void addAllExecutors(Bench4j<List<Person>, String> benchmark) {
+    private static void addAllExecutors(Bench4j_V1<List<Person>, String> benchmark) {
         benchmark
                 .addTestExecutor(PersonTestNameListExecutor::getStream, "stream")
                 .addTestExecutor(PersonTestNameListExecutor::getStreamToListToStringJoin, "stream to list")

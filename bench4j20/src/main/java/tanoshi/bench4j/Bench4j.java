@@ -1,114 +1,201 @@
 package tanoshi.bench4j;
 
-import org.jetbrains.annotations.NotNull;
+import tanoshi.bench4j.annotations.Benchmark;
+import tanoshi.bench4j.annotations.TestdataInitializer;
 import tanoshi.bench4j.data.*;
-import tanoshi.bench4j.settings.BenchmarkSettingsValidationResult;
+import tanoshi.bench4j.logging.BenchLogger;
+import tanoshi.bench4j.provider.IBenchmarkProvider;
+import tanoshi.bench4j.reflection.ReflectionHelper;
 import tanoshi.bench4j.settings.BenchmarkConfig;
-import tanoshi.utils.testdata.ITestDataProvider;
-import tanoshi.utils.units.time.converter.TimeConverter;
-import tanoshi.utils.units.time.TimeUnits;
+import tanoshi.bench4j.settings.BenchmarkParameters;
+import tanoshi.utils.logging.ILogger;
 import tanoshi.utils.timer.Timer;
+import tanoshi.utils.units.time.TimeUnits;
+import tanoshi.utils.units.time.converter.TimeConverter;
 
-import java.util.*;
-import java.util.function.Function;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class Bench4j<TIn, TOut> {
-    private final Map<String, Function<TIn, TOut>> testExecutors;
-    private final List<ITestDataProvider<TIn>> testDataProviders;
+// TODO: v2
+//  - add heap/memory stats
+//  - refactor benchmarking to be more module based
+//      - and depending on the module different things will be executed or measured during the tests
+//      - example: [BASE, MEMORY, DETAILED]
+//          - BASE: AVR
+//          - MEMORY: HEAP,GARBAGE COLLECTOR STATS
+//          - DETAILED: MIN, MAX, BATCH DURATION
+
+// TODO: refactor benchmarking parameters / options objects
+// TODO: more detailed benchmarking result + merge benchRes & benchRunRes
+
+public class Bench4j<T> {
+
+    public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) {
+        return run(BenchmarkParameters.from(benchmarkingClass).build());
+    }
+
+    public static <T> BenchmarkingResult run(Class<T> benchmarkingClass, T instance, BenchmarkConfig config, BenchLogger logger) {
+        return run(BenchmarkParameters.from(benchmarkingClass).withInstance(instance).withConfig(config).withLogger(logger)
+                .withConfig(config)
+                .withLogger(logger)
+                .withInstance(instance)
+                .build());
+    }
+
+    public static <T> BenchmarkingResult run(BenchmarkParameters<T> args) {
+        ILogger logger = args.logger();
+        Class<T> benchmarkingClass = args.benchmarkingClass();
+        T classInstance = args.instance();
+
+        List<Method> testInit = ReflectionHelper.getMethodWithAnnotation(benchmarkingClass, TestdataInitializer.class);
+        Method initMethod = null;
+        if (testInit.size() > 1) {
+            return BenchmarkingResult.fromError(new ErrorMessage("Only zero or one method with " + TestdataInitializer.class.getName() + " annotation allowed!"));
+        }
+
+        if (testInit.size() == 1) {
+            initMethod = testInit.get(0);
+            initMethod.setAccessible(true);
+
+            if (initMethod.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("TestdataInitMethod [" + initMethod.getName() + "] must have no parameters: Actual parameter count" + initMethod.getParameterCount()));
+            }
+        }
+
+        List<IBenchmarkProvider> providers = new ArrayList<>();
+        for (Field field : classInstance.getClass().getDeclaredFields()) {
+            initMethod = testInit.get(0);
+
+            if (initMethod.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("TestdataInitMethod [" + initMethod.getName() + "] must have no parameters: Actual parameter count" + initMethod.getParameterCount()));
+            }
+            try {
+                IBenchmarkProvider provider = IBenchmarkProvider.tryGetProvider(classInstance, field);
+                if (provider != null) {
+                    providers.add(provider);
+                }
+            } catch (IllegalArgumentException e) {
+                return BenchmarkingResult.fromError(new ErrorMessage("Invalid init testdata method", e));
+            }
+        }
+
+        if (providers.size() == 0) {
+            providers.add(IBenchmarkProvider.emptyProvider());
+        }
+
+        logger.info("Finding benchmarking methods");
+        List<Method> benchMethods = ReflectionHelper.getMethodWithAnnotation(benchmarkingClass, Benchmark.class);
+        if (benchMethods.isEmpty()) {
+            return BenchmarkingResult.fromError(
+                    new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchmarkingClass.getTypeName()),
+                    logger);
+        }
+
+        for (Method method : benchMethods) {
+            method.setAccessible(true);
+
+            if (method.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("BenchmarkingMethod [" + method.getName() + "] must have no parameters: Actual parameter count" + method.getParameterCount()));
+            }
+        }
+
+        logger.info("Benchmarking methods: %s", benchMethods.stream().map(Method::getName).collect(Collectors.joining(", ")));
+
+        Bench4j<T> runner = new Bench4j<>(args, benchMethods, initMethod, providers);
+        return runner.doBenchmarks();
+    }
+
 
     private final BenchmarkConfig config;
 
-    public Bench4j(BenchmarkConfig config) {
-        this.testExecutors = new HashMap<>();
-        this.testDataProviders = new ArrayList<>();
-        this.config = Objects.requireNonNullElseGet(config, BenchmarkConfig::new);
+    private final List<Method> benchMethods;
+    private final T classInstance;
+    private final BenchLogger logger;
+    private final Method initMethod;
+    private final List<IBenchmarkProvider> providers;
+
+    private Bench4j(BenchmarkParameters<T> args, List<Method> benchMethods, Method initMethod, List<IBenchmarkProvider> providers) {
+        this.config = args.config();
+        this.benchMethods = benchMethods;
+        this.classInstance = args.instance();
+        this.logger = args.logger();
+        this.initMethod = initMethod;
+        this.providers = providers;
     }
 
-    public Bench4j() {
-        this(new BenchmarkConfig());
+    private BenchLogger logTable(ILogger.Level level, String tableView) {
+        logger.log(level, "%n%s", tableView);
+        return logger;
     }
 
-    public Bench4j<TIn, TOut> addTestExecutor(@NotNull Function<TIn, TOut> executor, @NotNull String executorName) {
-        Function<TIn, TOut> val = testExecutors.putIfAbsent(executorName, executor);
-        if (val == null) {
-            System.out.printf("Executor [%s] already exists, did not add or replace!%n", executorName);
-        }
-        return this;
-    }
-
-    public Bench4j<TIn, TOut> addTestDataProvider(@NotNull ITestDataProvider<TIn> provider) {
-        testDataProviders.add(provider);
-        return this;
-    }
-
-    public Bench4j<TIn, TOut> addTestDataProvider(@NotNull Collection<ITestDataProvider<TIn>> providers) {
-        for (ITestDataProvider<TIn> provider : providers) {
-            addTestDataProvider(provider);
-        }
-        return this;
-    }
-
-    public BenchmarkingResult doBenchmarks() {
+    private BenchmarkingResult doBenchmarks() {
         long startTime = Timer.getNanoTime();
-        BenchmarkSettingsValidationResult validation = validateSetup();
-        if (!validation.isValid()) {
-            return BenchmarkingResult.fromError(new ErrorMessage("Invalid arguments: " + validation));
-        }
-        BenchmarkingRunResult runResult = doPerformanceTests();
+        BenchmarkingRunResult runResult = new BenchmarkingRunResult();
 
-        return new BenchmarkingResult(true, runResult, null,
-                TimeConverter.toMilli(TimeUnits.NANOSECONDS, Timer.getElapsedNanos(startTime)), config.getTableOptions());
-    }
-
-    private BenchmarkSettingsValidationResult validateSetup() {
-        BenchmarkSettingsValidationResult result = new BenchmarkSettingsValidationResult();
-
-        result.setHasDataProviders(!testDataProviders.isEmpty());
-        result.setHasExecutors(!testExecutors.isEmpty());
-
-        return result;
-    }
-
-    private BenchmarkingRunResult doPerformanceTests() {
-        BenchmarkingRunResult result = new BenchmarkingRunResult();
-        for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
-            result.addProviderResult(doPerformProviderBenchmarks(dataProvider));
+        //for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
+        for (IBenchmarkProvider provider : providers) {
+            for (String providerName : provider) {
+                if (initMethod != null) {
+                    try {
+                        initMethod.invoke(classInstance);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke testInit method for provider [" + providerName + "]", e), logger);
+                    }
+                }
+                runResult.addProviderResult(doPerformProviderBenchmarks(providerName));
+            }
         }
 
-        System.out.println(result.toView(config.getTableOptions()));
-        return result;
+        logTable(ILogger.Level.INFO, runResult.toView(config.getTableOptions())).info("Completed benchmark run");
+
+        return new BenchmarkingResult(true, runResult, null, TimeConverter.toMilli(TimeUnits.NANOSECONDS,
+                Timer.getElapsedNanos(startTime)), config.getTableOptions());
     }
 
-    private ProviderResult doPerformProviderBenchmarks(ITestDataProvider<TIn> dataProvider) {
-        System.out.printf("%n%n[%s] Running benchmarks for provider%n", dataProvider.getName());
-        int batchSize = calculateTargetBatchSize(dataProvider);
+    private ProviderResult doPerformProviderBenchmarks(String providerName) {
+        logger.emptyLine();
+        logger.withProvider(providerName);
+        logger.info("Running benchmarks for provider [%s]", providerName);
 
-        ProviderResult providerRes = new ProviderResult(dataProvider.getName());
+        int batchSize = calculateTargetBatchSize();
+
+        ProviderResult providerRes = new ProviderResult(providerName);
         providerRes.setTargetBatchSize(batchSize);
 
-        for (Map.Entry<String, Function<TIn, TOut>> set : testExecutors.entrySet()) {
-            String name = set.getKey();
-            Function<TIn, TOut> exec = set.getValue();
-            ExecutorResult execRes = dePerformExecutorBenchmarks(exec, dataProvider, name, batchSize);
+        for (Method method : benchMethods) {
+            String name = method.getName();
+            ExecutorResult execRes = dePerformExecutorBenchmarks(method, name, batchSize);
             providerRes.addExecutorRes(execRes);
         }
 
-        System.out.println(providerRes.toView(config.getTableOptions()));
+        logger.emptyLine();
+        logTable(ILogger.Level.INFO, providerRes.toView(config.getTableOptions()));
+        logger.removeProvider();
+        logger.emptyLine();
+
         return providerRes;
     }
 
-    private int calculateTargetBatchSize(ITestDataProvider<TIn> dataProvider) {
-        System.out.printf("[%s] Calculating batch sizes%n", dataProvider.getName());
+    private int calculateTargetBatchSize() {
+        logger.info("Calculating batch sizes");
 
         double slowestDuration = 0;
-        Function<TIn, TOut> slowestExec = null;
+        Method slowestExec = null;
         int j = 0;
         while (slowestDuration < TimeConverter.toNano(TimeUnits.SECONDS, config.getTargetBatchTimeSec()) / 2) {
             j++;
-            for (Function<TIn, TOut> executor : testExecutors.values()) {
+            for (Method executor : benchMethods) {
                 BatchResultSet resultSet = new BatchResultSet("calc target batch size");
 
-                resultSet.addBatch(performBatch(executor, dataProvider, (int) Math.pow(2, j), true));
+                resultSet.addBatch(performBatch(executor, (int) Math.pow(2, j), true));
                 if (resultSet.getAvrDuration() > slowestDuration) {
                     slowestExec = executor;
                     slowestDuration = resultSet.getAvrDuration();
@@ -118,63 +205,61 @@ public class Bench4j<TIn, TOut> {
 
         BatchResultSet resultSet = new BatchResultSet();
         for (int i = 0; i < 5; i++) {
-            resultSet.addBatch(performBatch(slowestExec, dataProvider, (int) Math.pow(2, j), true));
+            resultSet.addBatch(performBatch(slowestExec, (int) Math.pow(2, j), true));
         }
 
         double calcAvrExecNanos = resultSet.getAvr();
         double targetBatchNano = TimeConverter.toNano(TimeUnits.SECONDS, config.getTargetBatchTimeSec());
 
         int calcBatchSize = Math.min((int) Math.round(targetBatchNano / calcAvrExecNanos), config.getMaxBatchSize());
-        System.out.printf("[%s] Calculated batch size: %d%n", dataProvider.getName(), calcBatchSize);
+        logger.info("Calculated batch size: %d", calcBatchSize).emptyLine();
 
         return calcBatchSize;
     }
 
-    private ExecutorResult dePerformExecutorBenchmarks(Function<TIn, TOut> exec,
-                                                       ITestDataProvider<TIn> dataProvider,
-                                                       String executorName,
-                                                       int targetBatchSize) {
-        System.out.printf("%n[%s]/[%s] Running benchmarks for executor%n%n", dataProvider.getName(), executorName);
+    private ExecutorResult dePerformExecutorBenchmarks(Method method, String executorName, int targetBatchSize) {
+        logger.withExecutor(executorName);
+
+        logger.info("Running benchmarks for executor");
         ExecutorResult execRes = new ExecutorResult(executorName);
-        WarmupResult warmupRes = doWarmup(exec, dataProvider, executorName, targetBatchSize);
-        System.out.printf("[%s] Executing benchmarks%n", executorName);
+        WarmupResult warmupRes = doWarmup(method, targetBatchSize);
         execRes.setWarmupRes(warmupRes);
         execRes.setBatchSize(targetBatchSize);
 
+        logger.info("Executing benchmarks", executorName);
         for (int i = 0; i < config.getBatchIterations(); i++) {
-            execRes.addBatch(performBatch(exec, dataProvider, targetBatchSize));
+            execRes.addBatch(performBatch(method, targetBatchSize));
         }
 
-        System.out.printf("[%s] %s%n", executorName, execRes);
+        logger.info(execRes).emptyLine();
+        logger.removeExecutor();
         return execRes;
     }
 
-    private WarmupResult doWarmup(Function<TIn, TOut> exec,
-                                  ITestDataProvider<TIn> dataProvider,
-                                  String executorName,
-                                  int targetBatchSize) {
-        System.out.printf("[%s] Benchmark warmup%n", executorName);
+    private WarmupResult doWarmup(Method method, int targetBatchSize) {
+        logger.info("Benchmark warmup");
         WarmupResult warmupResult = new WarmupResult();
         int batchSize = 0;
         for (int i = 2; batchSize <= Math.round(targetBatchSize * config.getWarmupFactor()); i++) {
             batchSize = (int) Math.pow(2, i);
-            performBatch(exec, dataProvider, batchSize);
+            performBatch(method, batchSize);
         }
 
         for (int i = 0; i < 5; i++) {
-            warmupResult.addBatch(performBatch(exec, dataProvider, batchSize));
+            warmupResult.addBatch(performBatch(method, batchSize));
         }
 
         warmupResult.setReachedBatchSize(batchSize);
-        System.out.printf("[%s] %s%n", executorName, warmupResult);
+        logger.info(warmupResult);
         return warmupResult;
     }
 
-    private BatchResult performBatch(Function<TIn, TOut> executor, ITestDataProvider<TIn> testDataProvider, int runs) {
-        return performBatch(executor, testDataProvider, runs, false);
+
+    private BatchResult performBatch(Method method, int runs) {
+        return performBatch(method, runs, false);
     }
 
-    private BatchResult performBatch(Function<TIn, TOut> executor, ITestDataProvider<TIn> testDataProvider, int runs, boolean silent) {
+    private BatchResult performBatch(Method method, int runs, boolean silent) {
         long[] times = new long[runs];
         double maxDuration = TimeConverter.toNano(TimeUnits.SECONDS, config.getMaxBatchTimeSec());
 
@@ -182,14 +267,17 @@ public class Bench4j<TIn, TOut> {
 
         long testStart = System.nanoTime();
         for (int i = 0; i < runs; i++) {
-            TIn testData = testDataProvider.getTestData();
             long st = System.nanoTime();
-            executor.apply(testData);
+            try {
+                method.invoke(classInstance);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
             long ed = System.nanoTime();
             times[i] = ed - st;
 
             if (ed - testStart > maxDuration) {
-                System.out.println("canceling batch (max time reached)");
+                logger.info("canceling batch (max time reached)");
                 break;
             }
         }
@@ -201,16 +289,9 @@ public class Bench4j<TIn, TOut> {
 
         BatchResult batchResult = new BatchResult(average, totalDuration, min, max, runs);
         if (!silent) {
-            System.out.println(batchResult);
+            logger.info(batchResult);
         }
         return batchResult;
     }
-
-    public Collection<Function<TIn, TOut>> getExecutors() {
-        return testExecutors.values();
-    }
-
-    public List<ITestDataProvider<TIn>> getTestDataProviders() {
-        return testDataProviders;
-    }
 }
+
