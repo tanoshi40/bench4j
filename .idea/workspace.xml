@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/BoolTestdata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/IntTestdata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/StrTestdata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/annotations/TestdataInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/provider/BenchmarkProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/provider/EmptyBenchmarkProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/provider/IBenchmarkProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/reflection/ReflectionHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4jV2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +25,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -70,13 +81,16 @@
     &quot;git-widget-placeholder&quot;: &quot;refactoring-to-use-reflections-and-annotations-instead-of-delegates&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
-    &quot;last_directory_selection&quot;: &quot;D:/Programming/git/bench4j/utils/timer/src/main/java/tanoshi&quot;,
+    &quot;last_directory_selection&quot;: &quot;E:/Programming/git/bench4j/bench4j20/src/main/java/tanoshi/bench4j&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Programming/git/bench4j&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="tanoshi.bench4j.data.provider" />
+      <recent name="tanoshi.bench4j.data" />
+      <recent name="tanoshi.bench4j.data.BenchmarkProvider" />
       <recent name="tanoshi.bench4j" />
       <recent name="tanoshi.bench4j.logging" />
     </key>
@@ -85,6 +99,9 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Programming\git\bench4j" />
+    </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="tanoshi.bench4j.reflection.ReflectionHelper" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="tanoshi.utils.tables" />
@@ -308,5 +325,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

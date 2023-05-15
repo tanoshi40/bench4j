@@ -1,23 +1,23 @@
 package tanoshi.bench4j;
 
-import tanoshi.bench4j.annotations.Benchmark;
+import tanoshi.bench4j.annotations.*;
 import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.logging.BenchLogger;
+import tanoshi.bench4j.provider.IBenchmarkProvider;
+import tanoshi.bench4j.reflection.ReflectionHelper;
 import tanoshi.bench4j.settings.BenchmarkConfig;
 import tanoshi.bench4j.settings.BenchmarkParameters;
 import tanoshi.logging.ILogger;
-import tanoshi.utils.tables.TableView;
 import tanoshi.utils.timer.Timer;
 import tanoshi.utils.units.time.TimeUnits;
 import tanoshi.utils.units.time.converter.TimeConverter;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 // TODO: v2
@@ -35,6 +35,25 @@ import java.util.stream.Collectors;
 
 public class Bench4jV2<T> {
 
+    private static <T> IBenchmarkProvider<T> tryGetProvider(T instance, Field testdataField) throws IllegalArgumentException {
+        IntTestdata intAnnotation = testdataField.getAnnotation(IntTestdata.class);
+        if (intAnnotation != null) {
+            return IBenchmarkProvider.createProvider(instance, testdataField, intAnnotation);
+        }
+
+        StrTestdata strAnnotation = testdataField.getAnnotation(StrTestdata.class);
+        if (strAnnotation != null) {
+            return IBenchmarkProvider.createProvider(instance, testdataField, strAnnotation);
+        }
+
+        BoolTestdata boolAnnotation = testdataField.getAnnotation(BoolTestdata.class);
+        if (boolAnnotation != null) {
+            return IBenchmarkProvider.createProvider(instance, testdataField, boolAnnotation);
+        }
+
+        return null;
+    }
+
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) {
         return run(BenchmarkParameters.from(benchmarkingClass).build());
     }
@@ -48,49 +67,87 @@ public class Bench4jV2<T> {
     }
 
     public static <T> BenchmarkingResult run(BenchmarkParameters<T> args) {
-        List<Method> benchMethods = new ArrayList<>();
+        ILogger logger = args.logger();
+        Class<T> benchmarkingClass = args.benchmarkingClass();
+        T classInstance = args.instance();
 
-        for (Method method : args.benchmarkingClass().getDeclaredMethods()) {
-            if (method.isAnnotationPresent(Benchmark.class)) {
-                // Verifying that parameters are all the same
-                if (method.getParameterCount() > 0) {
-                    return BenchmarkingResult.fromError(new ErrorMessage("Benchmarking methods can not have parameters"), args.logger());
-                }
+        List<Method> testInit = ReflectionHelper.getMethodWithAnnotation(benchmarkingClass, TestdataInitializer.class);
+        Method initMethod = null;
+        if (testInit.size() > 1) {
+            return BenchmarkingResult.fromError(new ErrorMessage("Only zero or one method with " + TestdataInitializer.class.getName() + " annotation allowed!"));
+        }
 
-                try {
-                    method.setAccessible(true);
-                    method.invoke(args.instance());
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke benchmarking method " + method.getName(), e), args.logger());
-                }
+        if (testInit.size() == 1) {
+            initMethod = testInit.get(0);
+            initMethod.setAccessible(true);
 
-                benchMethods.add(method);
+            if (initMethod.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("TestdataInitMethod [" + initMethod.getName() + "] must have no parameters: Actual parameter count" + initMethod.getParameterCount()));
             }
         }
 
-        args.logger().info("Benchmarking methods: %s", benchMethods.stream().map(Method::getName).collect(Collectors.joining(", ")));
+        List<IBenchmarkProvider<T>> providers = new ArrayList<>();
+        for (Field field : classInstance.getClass().getDeclaredFields()) {
+            initMethod = testInit.get(0);
 
-        if (benchMethods.isEmpty()) {
-            return BenchmarkingResult.fromError(new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + args.benchmarkingClass().getTypeName()), args.logger());
+            if (initMethod.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("TestdataInitMethod [" + initMethod.getName() + "] must have no parameters: Actual parameter count" + initMethod.getParameterCount()));
+            }
+            try {
+                IBenchmarkProvider<T> provider = tryGetProvider(classInstance, field);
+                if (provider != null) {
+                    providers.add(provider);
+                }
+            } catch (IllegalArgumentException e) {
+                return BenchmarkingResult.fromError(new ErrorMessage("Invalid init testdata method", e));
+            }
         }
 
-        Bench4jV2<T> runner = new Bench4jV2<>(args, benchMethods);
+        if (providers.size() == 0) {
+            providers.add(IBenchmarkProvider.emptyProvider());
+        }
+
+        logger.info("Finding benchmarking methods");
+        List<Method> benchMethods = ReflectionHelper.getMethodWithAnnotation(benchmarkingClass, Benchmark.class);
+        if (benchMethods.isEmpty()) {
+            return BenchmarkingResult.fromError(
+                    new ErrorMessage("No benchmarking methods with " + Benchmark.class.getName() + " annotation found in " + benchmarkingClass.getTypeName()),
+                    logger);
+        }
+
+        for (Method method : benchMethods) {
+            method.setAccessible(true);
+
+            if (method.getParameterCount() != 0) {
+                return BenchmarkingResult.fromError(
+                        new ErrorMessage("BenchmarkingMethod [" + method.getName() + "] must have no parameters: Actual parameter count" + method.getParameterCount()));
+            }
+        }
+
+        logger.info("Benchmarking methods: %s", benchMethods.stream().map(Method::getName).collect(Collectors.joining(", ")));
+
+        Bench4jV2<T> runner = new Bench4jV2<>(args, benchMethods, initMethod, providers);
         return runner.doBenchmarks();
     }
 
+
     private final BenchmarkConfig config;
 
-    private final Class<T> benchClass;
     private final List<Method> benchMethods;
     private final T classInstance;
     private final BenchLogger logger;
+    private final Method initMethod;
+    private final List<IBenchmarkProvider<T>> providers;
 
-    private Bench4jV2(BenchmarkParameters<T> args, List<Method> benchMethods) {
+    private Bench4jV2(BenchmarkParameters<T> args, List<Method> benchMethods, Method initMethod, List<IBenchmarkProvider<T>> providers) {
         this.config = args.config();
-        this.benchClass = args.benchmarkingClass();
         this.benchMethods = benchMethods;
         this.classInstance = args.instance();
         this.logger = args.logger();
+        this.initMethod = initMethod;
+        this.providers = providers;
     }
 
     private BenchLogger logTable(ILogger.Level level, String tableView) {
@@ -101,9 +158,20 @@ public class Bench4jV2<T> {
     private BenchmarkingResult doBenchmarks() {
         long startTime = Timer.getNanoTime();
         BenchmarkingRunResult runResult = new BenchmarkingRunResult();
+
         //for (ITestDataProvider<TIn> dataProvider : testDataProviders) {
-        runResult.addProviderResult(doPerformProviderBenchmarks("default provider"));
-        //}
+        for (IBenchmarkProvider<T> provider : providers) {
+            for (String providerName : provider) {
+                if (initMethod != null) {
+                    try {
+                        initMethod.invoke(classInstance);
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        return BenchmarkingResult.fromError(new ErrorMessage("Failed to invoke testInit method for provider [" + providerName + "]", e), logger);
+                    }
+                }
+                runResult.addProviderResult(doPerformProviderBenchmarks(providerName));
+            }
+        }
 
         logTable(ILogger.Level.INFO, runResult.toView(config.getTableOptions())).info("Completed benchmark run");
 
