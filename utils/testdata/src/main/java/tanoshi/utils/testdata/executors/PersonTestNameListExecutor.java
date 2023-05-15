@@ -1,6 +1,6 @@
-package tanoshi.testdata.executors;
+package tanoshi.utils.testdata.executors;
 
-import tanoshi.testdata.models.Person;
+import tanoshi.utils.testdata.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;

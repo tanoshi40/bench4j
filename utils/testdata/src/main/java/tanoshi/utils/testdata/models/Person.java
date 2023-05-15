@@ -1,4 +1,4 @@
-package tanoshi.testdata.models;
+package tanoshi.utils.testdata.models;
 
 public class Person {
 

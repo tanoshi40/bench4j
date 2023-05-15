@@ -1,4 +1,4 @@
-package tanoshi.logging;
+package tanoshi.utils.logging;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

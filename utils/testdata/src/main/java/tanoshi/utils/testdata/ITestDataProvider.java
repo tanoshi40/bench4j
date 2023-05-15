@@ -1,4 +1,4 @@
-package tanoshi.testdata;
+package tanoshi.utils.testdata;
 
 public interface ITestDataProvider<T> {
 

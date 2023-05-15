@@ -1,7 +1,7 @@
-package tanoshi.testdata.provider;
+package tanoshi.utils.testdata.provider;
 
-import tanoshi.testdata.ITestDataProvider;
-import tanoshi.testdata.models.Person;
+import tanoshi.utils.testdata.ITestDataProvider;
+import tanoshi.utils.testdata.models.Person;
 
 import java.util.List;
 

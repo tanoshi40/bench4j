@@ -5,12 +5,12 @@ import au.com.origin.snapshots.junit5.SnapshotExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import tanoshi.testdata.models.Person;
-import tanoshi.testdata.provider.PersonTestDataProvider;
+import tanoshi.utils.testdata.models.Person;
+import tanoshi.utils.testdata.provider.PersonTestDataProvider;
 
 import java.util.List;
 
-import static tanoshi.testdata.executors.PersonTestNameListExecutor.*;
+import static tanoshi.utils.testdata.executors.PersonTestNameListExecutor.*;
 
 @ExtendWith({SnapshotExtension.class})
 class PersonTestNameListExecutorTest {

@@ -1,4 +1,4 @@
-package tanoshi.logging;
+package tanoshi.utils.logging;
 
 public interface ILogger {
     ILogger info(Object message);

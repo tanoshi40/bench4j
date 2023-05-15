@@ -1,6 +1,6 @@
-package tanoshi.testdata.provider;
+package tanoshi.utils.testdata.provider;
 
-import tanoshi.testdata.models.Person;
+import tanoshi.utils.testdata.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;
