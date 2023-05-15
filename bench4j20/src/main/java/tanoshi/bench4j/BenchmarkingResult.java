@@ -48,11 +48,12 @@ public class BenchmarkingResult {
         return elapsedMillis;
     }
 
-    public String toView() {
-        return toView(displayOptions);
+    @Override
+    public String toString() {
+        return toString(displayOptions);
     }
 
-    public String toView(BenchmarkTableBuilderSettings displayOptions) {
+    public String toString(BenchmarkTableBuilderSettings displayOptions) {
         if (!success) {
             return "BenchmarkingResult{success=%s, errorMessage='%s'}".formatted(false, errorMessage);
         }

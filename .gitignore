@@ -1,6 +1,11 @@
 # project specific
 _*
 
+# snapshot testing
+!*.snap
+!__snapshots__/
+
+
 ### java
 **/target/
 !.mvn/wrapper/maven-wrapper.jar
