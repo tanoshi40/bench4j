@@ -5,6 +5,10 @@ import tanoshi.utils.colors.Color;
 import tanoshi.utils.colors.ConsoleTextColor;
 import tanoshi.utils.tables.settings.TableSettings;
 
+/**
+ * Use {@link BenchmarkParameters} instead
+ */
+@Deprecated(since = "2.*")
 public class BenchmarkConfig {
 
     private double targetBatchTimeSec;

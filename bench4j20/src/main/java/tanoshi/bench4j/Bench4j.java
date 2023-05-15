@@ -6,7 +6,6 @@ import tanoshi.bench4j.data.*;
 import tanoshi.bench4j.logging.BenchLogger;
 import tanoshi.bench4j.provider.IBenchmarkProvider;
 import tanoshi.bench4j.reflection.ReflectionHelper;
-import tanoshi.bench4j.settings.BenchmarkConfig;
 import tanoshi.bench4j.settings.BenchmarkParameters;
 import tanoshi.utils.logging.ILogger;
 import tanoshi.utils.timer.Timer;
@@ -39,9 +38,9 @@ public class Bench4j<T> {
         return run(BenchmarkParameters.from(benchmarkingClass).build());
     }
 
-    public static <T> BenchmarkingResult run(Class<T> benchmarkingClass, T instance, BenchmarkConfig config, BenchLogger logger) {
-        return run(BenchmarkParameters.from(benchmarkingClass).withInstance(instance).withConfig(config).withLogger(logger)
-                .withConfig(config)
+    public static <T> BenchmarkingResult run(Class<T> benchmarkingClass, T instance, BenchLogger logger) {
+        return run(BenchmarkParameters.from(benchmarkingClass).withInstance(instance)
+                .withLogger(logger)
                 .withLogger(logger)
                 .withInstance(instance)
                 .build());
@@ -114,7 +113,7 @@ public class Bench4j<T> {
     }
 
 
-    private final BenchmarkConfig config;
+    private final BenchmarkParameters<T> config;
 
     private final List<Method> benchMethods;
     private final T classInstance;
@@ -123,7 +122,7 @@ public class Bench4j<T> {
     private final List<IBenchmarkProvider> providers;
 
     private Bench4j(BenchmarkParameters<T> args, List<Method> benchMethods, Method initMethod, List<IBenchmarkProvider> providers) {
-        this.config = args.config();
+        this.config = args;
         this.benchMethods = benchMethods;
         this.classInstance = args.instance();
         this.logger = args.logger();
@@ -131,8 +130,8 @@ public class Bench4j<T> {
         this.providers = providers;
     }
 
-    private BenchLogger logTable(ILogger.Level level, String tableView) {
-        logger.log(level, "%n%s", tableView);
+    private BenchLogger logTable(String tableView) {
+        logger.info("%n%s", tableView);
         return logger;
     }
 
@@ -154,10 +153,10 @@ public class Bench4j<T> {
             }
         }
 
-        logTable(ILogger.Level.INFO, runResult.toView(config.getTableOptions())).info("Completed benchmark run");
+        logTable(runResult.toView(config.tableBuilderSettings())).info("Completed benchmark run");
 
         return new BenchmarkingResult(true, runResult, null, TimeConverter.toMilli(TimeUnits.NANOSECONDS,
-                Timer.getElapsedNanos(startTime)), config.getTableOptions());
+                Timer.getElapsedNanos(startTime)), config.tableBuilderSettings());
     }
 
     private ProviderResult doPerformProviderBenchmarks(String providerName) {
@@ -177,7 +176,7 @@ public class Bench4j<T> {
         }
 
         logger.emptyLine();
-        logTable(ILogger.Level.INFO, providerRes.toView(config.getTableOptions()));
+        logTable(providerRes.toView(config.tableBuilderSettings()));
         logger.removeProvider();
         logger.emptyLine();
 
@@ -190,7 +189,7 @@ public class Bench4j<T> {
         double slowestDuration = 0;
         Method slowestExec = null;
         int j = 0;
-        while (slowestDuration < TimeConverter.toNano(TimeUnits.SECONDS, config.getTargetBatchTimeSec()) / 2) {
+        while (slowestDuration < TimeConverter.toNano(TimeUnits.SECONDS, config.targetBatchTimeSec()) / 2) {
             j++;
             for (Method executor : benchMethods) {
                 BatchResultSet resultSet = new BatchResultSet("calc target batch size");
@@ -209,9 +208,9 @@ public class Bench4j<T> {
         }
 
         double calcAvrExecNanos = resultSet.getAvr();
-        double targetBatchNano = TimeConverter.toNano(TimeUnits.SECONDS, config.getTargetBatchTimeSec());
+        double targetBatchNano = TimeConverter.toNano(TimeUnits.SECONDS, config.targetBatchTimeSec());
 
-        int calcBatchSize = Math.min((int) Math.round(targetBatchNano / calcAvrExecNanos), config.getMaxBatchSize());
+        int calcBatchSize = Math.min((int) Math.round(targetBatchNano / calcAvrExecNanos), config.maxBatchSize());
         logger.info("Calculated batch size: %d", calcBatchSize).emptyLine();
 
         return calcBatchSize;
@@ -227,7 +226,7 @@ public class Bench4j<T> {
         execRes.setBatchSize(targetBatchSize);
 
         logger.info("Executing benchmarks", executorName);
-        for (int i = 0; i < config.getBatchIterations(); i++) {
+        for (int i = 0; i < config.batchIterations(); i++) {
             execRes.addBatch(performBatch(method, targetBatchSize));
         }
 
@@ -240,7 +239,7 @@ public class Bench4j<T> {
         logger.info("Benchmark warmup");
         WarmupResult warmupResult = new WarmupResult();
         int batchSize = 0;
-        for (int i = 2; batchSize <= Math.round(targetBatchSize * config.getWarmupFactor()); i++) {
+        for (int i = 2; batchSize <= Math.round(targetBatchSize * config.warmupFactor()); i++) {
             batchSize = (int) Math.pow(2, i);
             performBatch(method, batchSize);
         }
@@ -261,7 +260,7 @@ public class Bench4j<T> {
 
     private BatchResult performBatch(Method method, int runs, boolean silent) {
         long[] times = new long[runs];
-        double maxDuration = TimeConverter.toNano(TimeUnits.SECONDS, config.getMaxBatchTimeSec());
+        double maxDuration = TimeConverter.toNano(TimeUnits.SECONDS, config.maxBatchTimeSec());
 
         System.gc();
 
