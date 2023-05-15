@@ -20,6 +20,19 @@ import java.util.jar.JarEntry;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+// TODO: v2
+//  - add heap/memory stats
+//  - refactor benchmarking to be more module based
+//      - and depending on the module different things will be executed or measured during the tests
+//      - example: [BASE, MEMORY, DETAILED]
+//          - BASE: AVR
+//          - MEMORY: HEAP,GARBAGE COLLECTOR STATS
+//          - DETAILED: MIN, MAX, BATCH DURATION
+
+// TODO: refactor benchmarking parameters / options objects
+// TODO: more detailed benchmarking result + merge benchRes & benchRunRes
+// TODO: add providers or handling for multiple test data sets
+
 public class Bench4jV2<T> {
 
     public static <T> BenchmarkingResult run(Class<T> benchmarkingClass) {

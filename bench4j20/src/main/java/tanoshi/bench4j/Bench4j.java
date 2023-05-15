@@ -12,16 +12,6 @@ import tanoshi.utils.timer.Timer;
 import java.util.*;
 import java.util.function.Function;
 
-// TODO: v2
-//  - add better way to create testdata -> for example use maps
-//  - add heap/memory stats
-//  - refactor benchmarking to be more module based
-//      - and depending on the module different things will be executed or measured during the tests
-//      - example: [BASE, MEMORY, DETAILED]
-//          - BASE: AVR
-//          - MEMORY: HEAP,GARBAGE COLLECTOR STATS
-//          - DETAILED: MIN, MAX, BATCH DURATION
-
 public class Bench4j<TIn, TOut> {
     private final Map<String, Function<TIn, TOut>> testExecutors;
     private final List<ITestDataProvider<TIn>> testDataProviders;
