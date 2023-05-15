@@ -49,7 +49,7 @@ public class BenchmarkParametersBuilder<T> {
     private T getInstance() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         logger.info("Creating an instance of '%s' class", benchmarkingClass.getTypeName());
 
-        Constructor<T> constructor = benchmarkingClass.getConstructor();
+        Constructor<T> constructor = benchmarkingClass.getDeclaredConstructor();
         constructor.setAccessible(true);
 
         return constructor.newInstance();
