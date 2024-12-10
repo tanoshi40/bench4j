@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="" />
+    <list default="true" id="e6e0e1a2-c232-4b29-8a31-172405f81d4d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Bench4jV2Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bench4j20/src/test/java/tanoshi/bench4j/benchmarks/Benchmarks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/Bench4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/ErrorMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/ErrorMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/exceptions/InternalBenchmarkBuildingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/bench4j20/src/main/java/tanoshi/bench4j/exceptions/InternalBenchmarkBuildingException.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +30,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="refactoring-to-use-reflections-and-annotations-instead-of-delegates" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -42,38 +56,49 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PNk0Y9ukFeIy2Dt5vU2ewwRmoL" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;refactoring-to-use-reflections-and-annotations-instead-of-delegates&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
-    &quot;last_directory_selection&quot;: &quot;E:/Programming/git/bench4j/bench4j20/src/main/java/tanoshi/bench4j&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/git/bench4j&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "JUnit.All.executor": "Run",
+    "JUnit.Bench4jV2Test.testDoBenchmarks.executor": "Run",
+    "JUnit.[bench4j] all.executor": "Run",
+    "JUnit.[utils.colors] all.executor": "Run",
+    "JUnit.[utils.logging] all.executor": "Run",
+    "JUnit.[utils.tables] all.executor": "Run",
+    "JUnit.[utils.testdata] all.executor": "Run",
+    "JUnit.[utils.timer] all.executor": "Run",
+    "JUnit.[utils.units] all.executor": "Run",
+    "Maven.parent [clean,install] -local, skip tests .executor": "Run",
+    "Maven.parent [clean,install] -skip tests.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_directory_selection": "E:/Programming/git/bench4j/bench4j20/src/main/java/tanoshi/bench4j",
+    "last_opened_file_path": "D:/Programming/git/bench4j",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="tanoshi.numbers.range" />
@@ -98,21 +123,11 @@
       <recent name="tanoshi.testdata.provider" />
       <recent name="tanoshi.testdata.executors" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tanoshi.bench4j.benchmarks" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="tanoshi.Main" />
-      <module name="_testing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tanoshi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.Bench4jV2Test.testDoBenchmarks">
     <configuration name="[Tests] all" type="CompoundRunConfigurationType">
       <toRun name="[Tests] benchmarking all" type="CompoundRunConfigurationType" />
       <toRun name="[Tests] utils all" type="CompoundRunConfigurationType" />
@@ -130,6 +145,22 @@
       <toRun name="[utils.timer] all" type="JUnit" />
       <toRun name="[utils.units] all" type="JUnit" />
       <method v="2" />
+    </configuration>
+    <configuration name="Bench4jV2Test.testDoBenchmarks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bench4j20" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tanoshi.bench4j.benchmarks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tanoshi.bench4j.benchmarks" />
+      <option name="MAIN_CLASS_NAME" value="tanoshi.bench4j.benchmarks.Bench4jV2Test" />
+      <option name="METHOD_NAME" value="testDoBenchmarks" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="[bench4j] all" type="JUnit" factoryName="JUnit">
       <module name="bench4j20" />
@@ -207,6 +238,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -216,12 +248,16 @@
                 <option value="install" />
               </list>
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map>
                 <entry key="local-testing" value="true" />
                 <entry key="skip-tests" value="true" />
               </map>
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -236,6 +272,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -245,11 +282,15 @@
                 <option value="install" />
               </list>
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map>
                 <entry key="skip-tests" value="true" />
               </map>
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -264,6 +305,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -273,9 +315,13 @@
                 <option value="install" />
               </list>
             </option>
+            <option name="multimoduleDir" />
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -285,7 +331,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Compound.[Tests] all" />
       <item itemvalue="Compound.[Tests] benchmarking all" />
       <item itemvalue="Compound.[Tests] utils all" />
@@ -296,10 +341,16 @@
       <item itemvalue="JUnit.[utils.units] all" />
       <item itemvalue="JUnit.[utils.testdata] all" />
       <item itemvalue="JUnit.[utils.logging] all" />
+      <item itemvalue="JUnit.Bench4jV2Test.testDoBenchmarks" />
       <item itemvalue="Maven.parent [clean,install]" />
       <item itemvalue="Maven.parent [clean,install] -skip tests" />
       <item itemvalue="Maven.parent [clean,install] -local, skip tests " />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Bench4jV2Test.testDoBenchmarks" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -311,6 +362,17 @@
       <updated>1683304708190</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

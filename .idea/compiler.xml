@@ -19,6 +19,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="numbers" target="20" />
+      <module name="testing.console" target="20" />
     </bytecodeTargetLevel>
   </component>
 </project>
