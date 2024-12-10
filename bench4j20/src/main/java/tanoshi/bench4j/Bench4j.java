@@ -109,7 +109,7 @@ public class Bench4j<T> {
             if (testDataInitMethod != null) logger.info("Using test data init method %s", testDataInitMethod);
             logger.info("Searching for providers");
             providers = getProviders(classInstance);
-            if (providers.size() == 0) providers.add(IBenchmarkProvider.emptyProvider());
+            if (providers.isEmpty()) providers.add(IBenchmarkProvider.emptyProvider());
             else logger.info("");
 
             logger.info("Searching for benchmarking methods");
